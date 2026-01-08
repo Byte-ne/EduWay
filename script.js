@@ -1,57 +1,9 @@
 // Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// ===== Parallax Car Animation =====
-const car = document.getElementById('car');
-const roadLine = document.getElementById('roadLine');
-const roadContainer = document.getElementById('roadContainer');
+// Parallax car animation removed.
 
-const SVG_HEIGHT = 5000;
-const SVG_WIDTH = 100;
 
-function updateCarPosition() {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  
-  // Get road container position relative to viewport
-  const roadRect = roadContainer.getBoundingClientRect();
-  
-  // Calculate where on the page the center of the screen is
-  const viewportCenter = window.innerHeight / 2;
-  const absoluteCenterY = scrollTop + viewportCenter;
-  
-  // Calculate what percentage of the road height this represents
-  const roadHeight = roadContainer.offsetHeight;
-  const roadScrollPercent = Math.min(Math.max(absoluteCenterY / roadHeight, 0), 1);
-  
-  // Get the SVG y-coordinate at this percentage
-  const svgY = roadScrollPercent * SVG_HEIGHT;
-  
-  // The road is straight, so x is always 50 (center)
-  const svgX = 50;
-  
-  // Convert SVG x coordinate to actual pixels
-  const scaleX = roadRect.width / SVG_WIDTH;
-  const actualX = svgX * scaleX;
-  
-  // Position car: fixed to viewport center vertically, following road horizontally
-  car.style.left = (roadRect.left + actualX) + 'px';
-  car.style.transform = 'translate(-50%, -50%) scaleY(-1)';
-}
-
-// Throttle scroll events for better performance
-let ticking = false;
-window.addEventListener('scroll', function() {
-  if (!ticking) {
-    window.requestAnimationFrame(function() {
-      updateCarPosition();
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
-
-window.addEventListener('resize', updateCarPosition);
-setTimeout(updateCarPosition, 100);
 
 // ===== Scroll Reveal Animation =====
 const observerOptions = {

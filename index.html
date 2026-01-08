@@ -8,21 +8,35 @@
   <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Straight Road with Car -->
+  <!-- Zigzag Road with Car -->
   <div class="road-container" id="roadContainer">
     <svg class="road-path" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 5000">
       <!-- Border/shadow -->
-      <line x1="50" y1="0" x2="50" y2="5000" stroke="#1967D2" stroke-width="18" opacity="0.3"/>
+      <path d="M 50,0 L 50,300 L 25,500 L 25,800 L 70,1000 L 70,1300 L 30,1500 L 30,1800 L 65,2000 L 65,2300 L 35,2500 L 35,2800 L 60,3000 L 60,3300 L 40,3500 L 40,3800 L 55,4000 L 55,4300 L 45,4500 L 45,5000" 
+            fill="none" 
+            stroke="#1967D2" 
+            stroke-width="18" 
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+            opacity="0.3"/>
       <!-- Main road -->
-      <line id="roadLine" x1="50" y1="0" x2="50" y2="5000" stroke="#4285F4" stroke-width="12"/>
+      <path id="roadLine" 
+            d="M 50,0 L 50,300 L 25,500 L 25,800 L 70,1000 L 70,1300 L 30,1500 L 30,1800 L 65,2000 L 65,2300 L 35,2500 L 35,2800 L 60,3000 L 60,3300 L 40,3500 L 40,3800 L 55,4000 L 55,4300 L 45,4500 L 45,5000" 
+            fill="none" 
+            stroke="#4285F4" 
+            stroke-width="12"
+            stroke-linecap="square"
+            stroke-linejoin="miter"/>
       <!-- Road dashes -->
-      <line x1="50" y1="0" x2="50" y2="5000" stroke="#ffffff" stroke-width="2" stroke-dasharray="40 60" opacity="0.5"/>
+      <path d="M 50,0 L 50,300 L 25,500 L 25,800 L 70,1000 L 70,1300 L 30,1500 L 30,1800 L 65,2000 L 65,2300 L 35,2500 L 35,2800 L 60,3000 L 60,3300 L 40,3500 L 40,3800 L 55,4000 L 55,4300 L 45,4500 L 45,5000" 
+            fill="none" 
+            stroke="#ffffff" 
+            stroke-width="2" 
+            stroke-dasharray="40 60" 
+            opacity="0.5"
+            stroke-linecap="square"
+            stroke-linejoin="miter"/>
     </svg>
-    <div class="car" id="car">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF6B6B">
-        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-      </svg>
-    </div>
   </div>
 
   <!-- Navigation -->
