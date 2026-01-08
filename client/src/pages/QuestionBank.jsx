@@ -16,228 +16,228 @@ export default function QuestionBank() {
             papers: [
                 {
                     year: "2024", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2024.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2024.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2024.pdf" }
+                        { name: "CSE Prelims 2024 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2024/CSP2024-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2024 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2024/CSP2024-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2024 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2024/CM2024-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2023", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2023.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2023.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2023.pdf" }
+                        { name: "CSE Prelims 2023 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2023/CSP2023-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2023 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2023/CSP2023-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2023 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2023/CM2023-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2022", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2022.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2022.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2022.pdf" }
+                        { name: "CSE Prelims 2022 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2022/CSP2022-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2022 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2022/CSP2022-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2022 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2022/CM2022-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2021", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2021.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2021.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2021.pdf" }
+                        { name: "CSE Prelims 2021 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2021/CSP2021-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2021 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2021/CSP2021-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2021 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2021/CM2021-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2020", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2020.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2020.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2020.pdf" }
+                        { name: "CSE Prelims 2020 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2020/CSP2020-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2020 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2020/CSP2020-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2020 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2020/CM2020-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2019", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2019.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2019.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2019.pdf" }
+                        { name: "CSE Prelims 2019 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2019/CSP2019-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2019 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2019/CSP2019-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2019 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2019/CM2019-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2018", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2018.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2018.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2018.pdf" }
+                        { name: "CSE Prelims 2018 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2018/CSP2018-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2018 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2018/CSP2018-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2018 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2018/CM2018-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2017", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2017.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2017.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2017.pdf" }
+                        { name: "CSE Prelims 2017 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2017/CSP2017-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2017 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2017/CSP2017-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2017 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2017/CM2017-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2016", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2016.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2016.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2016.pdf" }
+                        { name: "CSE Prelims 2016 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2016/CSP2016-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2016 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2016/CSP2016-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2016 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2016/CM2016-GS-Paper-I-English.pdf" }
                     ]
                 },
                 {
                     year: "2015", links: [
-                        { name: "Prelims GS Paper 1", url: "https://www.upsc.gov.in/sites/default/files/GS1_2015.pdf" },
-                        { name: "Prelims GS Paper 2 (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/CSAT_2015.pdf" },
-                        { name: "Mains Answer Key", url: "https://www.upsc.gov.in/sites/default/files/Mains_2015.pdf" }
+                        { name: "CSE Prelims 2015 GS Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2015/CSP2015-GS-Paper-I-English.pdf" },
+                        { name: "CSE Prelims 2015 GS Paper II (CSAT)", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2015/CSP2015-GS-Paper-II-English.pdf" },
+                        { name: "CSE Mains 2015 General Studies Paper I", url: "https://www.upsc.gov.in/sites/default/files/QuestionPaper2015/CM2015-GS-Paper-I-English.pdf" }
                     ]
                 }
             ]
         },
         neet: {
             title: "NEET UG Previous Year Papers",
-            description: "Medical Entrance Examination - Complete question papers with solutions",
+            description: "National Eligibility cum Entrance Test - Medical entrance examination",
             icon: "⚕️",
             color: "#34A853",
             papers: [
                 {
                     year: "2024", links: [
-                        { name: "NEET 2024 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2024.pdf" },
-                        { name: "NEET 2024 Solutions", url: "https://questionpepr.com/neet/neet-2024-solutions.pdf" },
-                        { name: "NEET 2024 Answer Key", url: "https://questionpepr.com/neet/neet-2024-answer-key.pdf" }
+                        { name: "NEET UG 2024 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2024.pdf" },
+                        { name: "NEET UG 2024 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2024.pdf" },
+                        { name: "NEET UG 2024 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2024.pdf" }
                     ]
                 },
                 {
                     year: "2023", links: [
-                        { name: "NEET 2023 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2023.pdf" },
-                        { name: "NEET 2023 Solutions", url: "https://questionpepr.com/neet/neet-2023-solutions.pdf" },
-                        { name: "NEET 2023 Answer Key", url: "https://questionpepr.com/neet/neet-2023-answer-key.pdf" }
+                        { name: "NEET UG 2023 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2023.pdf" },
+                        { name: "NEET UG 2023 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2023.pdf" },
+                        { name: "NEET UG 2023 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2023.pdf" }
                     ]
                 },
                 {
                     year: "2022", links: [
-                        { name: "NEET 2022 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2022.pdf" },
-                        { name: "NEET 2022 Solutions", url: "https://questionpepr.com/neet/neet-2022-solutions.pdf" },
-                        { name: "NEET 2022 Answer Key", url: "https://questionpepr.com/neet/neet-2022-answer-key.pdf" }
+                        { name: "NEET UG 2022 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2022.pdf" },
+                        { name: "NEET UG 2022 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2022.pdf" },
+                        { name: "NEET UG 2022 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2022.pdf" }
                     ]
                 },
                 {
                     year: "2021", links: [
-                        { name: "NEET 2021 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2021.pdf" },
-                        { name: "NEET 2021 Solutions", url: "https://questionpepr.com/neet/neet-2021-solutions.pdf" },
-                        { name: "NEET 2021 Answer Key", url: "https://questionpepr.com/neet/neet-2021-answer-key.pdf" }
+                        { name: "NEET UG 2021 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2021.pdf" },
+                        { name: "NEET UG 2021 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2021.pdf" },
+                        { name: "NEET UG 2021 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2021.pdf" }
                     ]
                 },
                 {
                     year: "2020", links: [
-                        { name: "NEET 2020 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2020.pdf" },
-                        { name: "NEET 2020 Solutions", url: "https://questionpepr.com/neet/neet-2020-solutions.pdf" },
-                        { name: "NEET 2020 Answer Key", url: "https://questionpepr.com/neet/neet-2020-answer-key.pdf" }
+                        { name: "NEET UG 2020 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2020.pdf" },
+                        { name: "NEET UG 2020 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2020.pdf" },
+                        { name: "NEET UG 2020 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2020.pdf" }
                     ]
                 },
                 {
                     year: "2019", links: [
-                        { name: "NEET 2019 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2019.pdf" },
-                        { name: "NEET 2019 Solutions", url: "https://questionpepr.com/neet/neet-2019-solutions.pdf" },
-                        { name: "NEET 2019 Answer Key", url: "https://questionpepr.com/neet/neet-2019-answer-key.pdf" }
+                        { name: "NEET UG 2019 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2019.pdf" },
+                        { name: "NEET UG 2019 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2019.pdf" },
+                        { name: "NEET UG 2019 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2019.pdf" }
                     ]
                 },
                 {
                     year: "2018", links: [
-                        { name: "NEET 2018 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2018.pdf" },
-                        { name: "NEET 2018 Solutions", url: "https://questionpepr.com/neet/neet-2018-solutions.pdf" },
-                        { name: "NEET 2018 Answer Key", url: "https://questionpepr.com/neet/neet-2018-answer-key.pdf" }
+                        { name: "NEET UG 2018 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2018.pdf" },
+                        { name: "NEET UG 2018 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2018.pdf" },
+                        { name: "NEET UG 2018 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2018.pdf" }
                     ]
                 },
                 {
                     year: "2017", links: [
-                        { name: "NEET 2017 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2017.pdf" },
-                        { name: "NEET 2017 Solutions", url: "https://questionpepr.com/neet/neet-2017-solutions.pdf" },
-                        { name: "NEET 2017 Answer Key", url: "https://questionpepr.com/neet/neet-2017-answer-key.pdf" }
+                        { name: "NEET UG 2017 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2017.pdf" },
+                        { name: "NEET UG 2017 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2017.pdf" },
+                        { name: "NEET UG 2017 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2017.pdf" }
                     ]
                 },
                 {
                     year: "2016", links: [
-                        { name: "NEET 2016 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2016.pdf" },
-                        { name: "NEET 2016 Solutions", url: "https://questionpepr.com/neet/neet-2016-solutions.pdf" },
-                        { name: "NEET 2016 Answer Key", url: "https://questionpepr.com/neet/neet-2016-answer-key.pdf" }
+                        { name: "NEET UG 2016 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2016.pdf" },
+                        { name: "NEET UG 2016 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2016.pdf" },
+                        { name: "NEET UG 2016 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2016.pdf" }
                     ]
                 },
                 {
                     year: "2015", links: [
-                        { name: "NEET 2015 Question Paper", url: "https://questionpepr.com/neet/previous-year-neet-question-papers/2015.pdf" },
-                        { name: "NEET 2015 Solutions", url: "https://questionpepr.com/neet/neet-2015-solutions.pdf" },
-                        { name: "NEET 2015 Answer Key", url: "https://questionpepr.com/neet/neet-2015-answer-key.pdf" }
+                        { name: "NEET UG 2015 Question Paper", url: "https://neet.nta.nic.in/Admin/getFile?file=QuestionPaper_NEET(UG)_2015.pdf" },
+                        { name: "NEET UG 2015 Answer Key", url: "https://neet.nta.nic.in/Admin/getFile?file=AnswerKey_NEET(UG)_2015.pdf" },
+                        { name: "NEET UG 2015 Solutions", url: "https://neet.nta.nic.in/Admin/getFile?file=Solutions_NEET(UG)_2015.pdf" }
                     ]
                 }
             ]
         },
         jee: {
             title: "JEE Main Previous Year Papers",
-            description: "Engineering Entrance - Mathematics, Physics, Chemistry papers",
+            description: "Joint Entrance Examination - Mathematics, Physics, Chemistry papers",
             icon: "⚡",
             color: "#EA4335",
             papers: [
                 {
                     year: "2024", links: [
-                        { name: "JEE Main 2024 January", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2024-january.pdf" },
-                        { name: "JEE Main 2024 April", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2024-april.pdf" },
-                        { name: "JEE Main 2024 Solutions", url: "https://admission.aglasem.com/jee-main-2024-solutions.pdf" }
+                        { name: "JEE Main 2024 Session 1 (January)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2024_Session1_QuestionPaper.pdf" },
+                        { name: "JEE Main 2024 Session 2 (April)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2024_Session2_QuestionPaper.pdf" },
+                        { name: "JEE Main 2024 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2024_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2023", links: [
-                        { name: "JEE Main 2023 January", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2023-january.pdf" },
-                        { name: "JEE Main 2023 April", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2023-april.pdf" },
-                        { name: "JEE Main 2023 Solutions", url: "https://admission.aglasem.com/jee-main-2023-solutions.pdf" }
+                        { name: "JEE Main 2023 Session 1 (January)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2023_Session1_QuestionPaper.pdf" },
+                        { name: "JEE Main 2023 Session 2 (April)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2023_Session2_QuestionPaper.pdf" },
+                        { name: "JEE Main 2023 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2023_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2022", links: [
-                        { name: "JEE Main 2022 June", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2022-june.pdf" },
-                        { name: "JEE Main 2022 July", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2022-july.pdf" },
-                        { name: "JEE Main 2022 Solutions", url: "https://admission.aglasem.com/jee-main-2022-solutions.pdf" }
+                        { name: "JEE Main 2022 Session 1 (June)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2022_Session1_QuestionPaper.pdf" },
+                        { name: "JEE Main 2022 Session 2 (July)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2022_Session2_QuestionPaper.pdf" },
+                        { name: "JEE Main 2022 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2022_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2021", links: [
-                        { name: "JEE Main 2021 February", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2021-february.pdf" },
-                        { name: "JEE Main 2021 March", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2021-march.pdf" },
-                        { name: "JEE Main 2021 Solutions", url: "https://admission.aglasem.com/jee-main-2021-solutions.pdf" }
+                        { name: "JEE Main 2021 Session 1 (February)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2021_Session1_QuestionPaper.pdf" },
+                        { name: "JEE Main 2021 Session 2 (March)", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2021_Session2_QuestionPaper.pdf" },
+                        { name: "JEE Main 2021 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2021_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2020", links: [
-                        { name: "JEE Main 2020 January", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2020-january.pdf" },
-                        { name: "JEE Main 2020 September", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2020-september.pdf" },
-                        { name: "JEE Main 2020 Solutions", url: "https://admission.aglasem.com/jee-main-2020-solutions.pdf" }
+                        { name: "JEE Main 2020 September", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2020_September_QuestionPaper.pdf" },
+                        { name: "JEE Main 2020 January", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2020_January_QuestionPaper.pdf" },
+                        { name: "JEE Main 2020 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2020_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2019", links: [
-                        { name: "JEE Main 2019 January", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2019-january.pdf" },
-                        { name: "JEE Main 2019 April", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2019-april.pdf" },
-                        { name: "JEE Main 2019 Solutions", url: "https://admission.aglasem.com/jee-main-2019-solutions.pdf" }
+                        { name: "JEE Main 2019 January", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2019_January_QuestionPaper.pdf" },
+                        { name: "JEE Main 2019 April", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2019_April_QuestionPaper.pdf" },
+                        { name: "JEE Main 2019 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2019_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2018", links: [
-                        { name: "JEE Main 2018 Online", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2018-online.pdf" },
-                        { name: "JEE Main 2018 Offline", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2018-offline.pdf" },
-                        { name: "JEE Main 2018 Solutions", url: "https://admission.aglasem.com/jee-main-2018-solutions.pdf" }
+                        { name: "JEE Main 2018 Online", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2018_Online_QuestionPaper.pdf" },
+                        { name: "JEE Main 2018 Offline", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2018_Offline_QuestionPaper.pdf" },
+                        { name: "JEE Main 2018 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2018_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2017", links: [
-                        { name: "JEE Main 2017 Online", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2017-online.pdf" },
-                        { name: "JEE Main 2017 Offline", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2017-offline.pdf" },
-                        { name: "JEE Main 2017 Solutions", url: "https://admission.aglasem.com/jee-main-2017-solutions.pdf" }
+                        { name: "JEE Main 2017 Online", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2017_Online_QuestionPaper.pdf" },
+                        { name: "JEE Main 2017 Offline", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2017_Offline_QuestionPaper.pdf" },
+                        { name: "JEE Main 2017 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2017_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2016", links: [
-                        { name: "JEE Main 2016 Online", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2016-online.pdf" },
-                        { name: "JEE Main 2016 Offline", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2016-offline.pdf" },
-                        { name: "JEE Main 2016 Solutions", url: "https://admission.aglasem.com/jee-main-2016-solutions.pdf" }
+                        { name: "JEE Main 2016 Online", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2016_Online_QuestionPaper.pdf" },
+                        { name: "JEE Main 2016 Offline", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2016_Offline_QuestionPaper.pdf" },
+                        { name: "JEE Main 2016 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2016_AnswerKeys.pdf" }
                     ]
                 },
                 {
                     year: "2015", links: [
-                        { name: "JEE Main 2015 Online", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2015-online.pdf" },
-                        { name: "JEE Main 2015 Offline", url: "https://admission.aglasem.com/jee-main-previous-year-question-papers/2015-offline.pdf" },
-                        { name: "JEE Main 2015 Solutions", url: "https://admission.aglasem.com/jee-main-2015-solutions.pdf" }
+                        { name: "JEE Main 2015 Online", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2015_Online_QuestionPaper.pdf" },
+                        { name: "JEE Main 2015 Offline", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2015_Offline_QuestionPaper.pdf" },
+                        { name: "JEE Main 2015 Answer Keys", url: "https://jeemain.nta.nic.in/Admin/getFile?file=JEE(Main)2015_AnswerKeys.pdf" }
                     ]
                 }
             ]
