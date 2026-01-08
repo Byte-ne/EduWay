@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exam Deep Dive — Vidya Setu</title>
+  <!-- Deep Dive page: exam selector + syllabus details + dynamic dates -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="deepdive.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="page3.html" class="nav-link">Past Papers</a></li>
+        <li><a href="page4.html" class="nav-link">Games</a></li>
+        <li><a href="deepdive.html" class="nav-link active">Deep Dive View</a></li>
+      </ul>
+      <a class="logo-wrap" href="#">
+        <img src="images/logo.svg" alt="Vidya Setu Logo" class="logo">
+      </a>
+    </nav>
+  </header>
+
+  <main class="deepdive-main container">
+    <section class="intro">
+      <h1>Exam Deep Dive</h1>
+      <p class="lead">Select an exam to see the official syllabus, career outcomes, and upcoming dates — all with interactive, animated insights.</p>
+    </section>
+
+    <section class="deepdive-grid">
+      <aside class="exam-list" aria-label="Exam list">
+        <div class="search-wrap">
+          <input id="examSearch" type="search" placeholder="Search exams" aria-label="Search exams" />
+        </div>
+        <div id="exams" class="exams-grid" role="list"></div>
+      </aside>
+
+      <section id="examDetails" class="exam-details" aria-live="polite">
+        
+        <article class="details-card hidden" id="detailsCard">
+          <header class="details-header">
+            <h2 id="examTitle">Exam Title</h2>
+            <div class="exam-meta">
+              <span id="examType" class="pill">Exam</span>
+              <span id="examDifficulty" class="pill">Difficulty</span>
+            </div>
+          </header>
+
+          <section class="details-body">
+            <div class="col syllabus">
+              <h3>Syllabus</h3>
+              <ul id="syllabusList" class="bullet-list"></ul>
+            </div>
+
+            <div class="col outcomes">
+              <h3>Leads to</h3>
+              <ul id="outcomesList" class="bullet-list"></ul>
+
+              <h3>Upcoming Dates</h3>
+              <div id="datesList" class="dates-list"></div>
+            </div>
+          </section>
+
+          <footer class="details-footer">
+            <button id="openCal" class="btn btn-secondary">Add to calendar</button>
+            <div class="sparkline" id="sparkline" aria-hidden="true"></div>
+          </footer>
+        </article>
+      </section>
+    </section>
+
+    <section class="tips scroll-reveal">
+      <h3>Tips</h3>
+      <ul>
+        <li>Use the search to quickly find an exam.</li>
+        <li>Click dates to copy to clipboard or add to your calendar.</li>
+        <li>Use keyboard arrows to navigate cards and press Enter to open.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; <span id="year2"></span> Vidya Setu — Deep Dive</p>
+    </div>
+  </footer>
+
+  <script src="deepdive.js"></script>
+</body>
+</html>

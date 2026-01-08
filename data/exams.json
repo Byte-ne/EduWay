@@ -1,0 +1,67 @@
+{
+  "upsc": {
+    "dates": [
+      { "label": "Application opens", "date": "2026-02-01" },
+      { "label": "Preliminary exam", "date": "2026-06-07" },
+      { "label": "Mains exam", "date": "2026-09-18" },
+      { "label": "Final result", "date": "2027-04-15" }
+    ]
+  },
+
+  "jee": {
+    "dates": [
+      { "label": "JEE Main – Session 1", "date": "2026-01-15" },
+      { "label": "JEE Main – Session 2", "date": "2026-04-10" },
+      { "label": "JEE Advanced", "date": "2026-06-05" }
+    ]
+  },
+
+  "neet": {
+    "dates": [
+      { "label": "Application opens", "date": "2026-02-10" },
+      { "label": "Exam date", "date": "2026-05-03" },
+      { "label": "Result", "date": "2026-06-15" }
+    ]
+  },
+
+  "ssc": {
+    "dates": [
+      { "label": "Notification release", "date": "2026-03-15" },
+      { "label": "Tier 1 exam", "date": "2026-06-10" },
+      { "label": "Tier 2 exam", "date": "2026-09-05" },
+      { "label": "Final result", "date": "2026-12-20" }
+    ]
+  },
+
+  "gate": {
+    "dates": [
+      { "label": "Application opens", "date": "2025-09-01" },
+      { "label": "Exam date", "date": "2026-02-07" },
+      { "label": "Result", "date": "2026-03-20" }
+    ]
+  },
+
+  "cat": {
+    "dates": [
+      { "label": "Registration begins", "date": "2026-08-01" },
+      { "label": "Exam date", "date": "2026-11-29" },
+      { "label": "Result", "date": "2026-12-20" }
+    ]
+  },
+
+  "clat": {
+    "dates": [
+      { "label": "Application opens", "date": "2026-01-20" },
+      { "label": "Exam date", "date": "2026-05-10" },
+      { "label": "Result", "date": "2026-06-05" }
+    ]
+  },
+
+  "bankpo": {
+    "dates": [
+      { "label": "Prelims exam", "date": "2026-03-12" },
+      { "label": "Mains exam", "date": "2026-04-25" },
+      { "label": "Interview", "date": "2026-06-10" }
+    ]
+  }
+}
