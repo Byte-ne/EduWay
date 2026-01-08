@@ -1,0 +1,155 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
+body{
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+}
+
+header{
+  padding:22px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.logo{
+  font-size:24px;
+  font-weight:800;
+}
+
+.logo span{ color:#7fdbff; }
+
+nav a{
+  margin-left:22px;
+  text-decoration:none;
+  color:#cfe9ff;
+  font-size:14px;
+}
+
+.hero{
+  padding:80px 8% 50px;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:42px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:#d6eeff;
+}
+
+.papers{
+  padding:50px 8% 80px;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:26px;
+}
+
+.card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  border-radius:20px;
+  padding:26px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.45);
+  transition:0.3s ease;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.year{
+  font-size:26px;
+  font-weight:800;
+}
+
+.tag{
+  display:inline-block;
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:20px;
+  background:rgba(127,219,255,0.15);
+  color:#9edcff;
+  margin:10px 0 14px;
+}
+
+.links a{
+  display:block;
+  margin-top:10px;
+  padding:10px 14px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.1);
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.25s;
+}
+
+.links a:hover{
+  background:linear-gradient(135deg,#4aa3ff,#7fdbff);
+  color:#00334d;
+}
+
+footer{
+  text-align:center;
+  padding:18px;
+  font-size:12px;
+  color:#cfe9ff;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.logo-area{
+  display:flex;
+  align-items:center;
+}
+
+.mascot{
+  width:42px;
+  height:42px;
+  margin-right:12px;
+}
+.section-title{
+  font-size:22px;
+  font-weight:700;
+  color:#9edcff;
+  margin-bottom:18px;
+  text-align:center;
+  width:100%;
+  grid-column:1 / -1;
+}
+.papers{
+  padding: 30px 8% 60px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  overflow-x: auto;
+}
+
+.papers::-webkit-scrollbar{
+  height: 8px;
+}
+
+.papers::-webkit-scrollbar-thumb{
+  background: #2b2b2b;
+  border-radius: 10px;
+}
+.section{
+  margin-top: 40px;
+}
+
+.section-title{
+  font-size: 22px;
+  font-weight: 700;
+  color: #9edcff;
+  margin: 0 0 18px 8%;
+}

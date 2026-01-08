@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspirant Hub - All Exam PYQs</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#000;color:#fff;scroll-behavior:smooth;}
+header{padding:20px 8%;border-bottom:1px solid #222;position:sticky;top:0;background:#000;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.logo-area{display:flex;align-items:center;gap:12px}
+.mascot{width:42px;height:42px;background:#111;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
+.logo-text{font-size:22px;font-weight:700}
+.logo-text span{color:#4da3ff}
+.tabs{display:flex;gap:16px;flex-wrap:wrap}
+.tab{padding:8px 16px;border-radius:6px;cursor:pointer;background:#111;transition:.2s;font-weight:600;}
+.tab.active{background:#4da3ff;color:#000;}
+.hero{text-align:center;padding:40px 10%}
+.hero h1{font-size:36px;margin-bottom:10px;animation:fadeDown 1s ease-out}
+.hero p{color:#aaa;font-size:16px;animation:fadeDown 1.2s ease-out}
+.section{padding:20px 8%}
+.section-title{font-size:28px;margin-bottom:20px;animation:fadeDown 1.4s ease-out}
+.papers{display:flex;gap:24px;overflow-x:auto;padding-bottom:10px;scroll-behavior:smooth;}
+.papers::-webkit-scrollbar{display:none}
+.papers{-ms-overflow-style:none;scrollbar-width:none}
+.card{min-width:240px;background:#0e0e0e;border:1px solid #222;border-radius:14px;padding:20px;transition:all .3s ease;flex-shrink:0;opacity:0; transform:translateY(50px);}
+.card.visible{opacity:1;transform:translateY(0);}
+.card:hover{border-color:#4da3ff;transform:translateY(-8px) scale(1.05);box-shadow:0 8px 20px rgba(77,163,255,0.5);}
+.year{font-size:22px;font-weight:700;margin-bottom:14px}
+.links a{display:block;color:#4da3ff;text-decoration:none;margin-bottom:10px;transition:.2s}
+.links a:hover{text-decoration:underline;color:#00ffe0}
+.pdf-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:none;flex-direction:column;z-index:9999;opacity:0;transform:scale(0.95);transition:all .3s ease-out;}
+.pdf-modal.show{display:flex;opacity:1;transform:scale(1)}
+.pdf-header{padding:12px 20px;background:#111;display:flex;justify-content:space-between;align-items:center;}
+.pdf-header button{background:#4da3ff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;}
+.pdf-viewer{flex:1;animation:fadeIn 0.5s ease}
+.pdf-viewer iframe{width:100%;height:100%;border:none}
+footer{text-align:center;padding:20px;border-top:1px solid #222;color:#777;margin-top:40px}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <div class="mascot">🎓</div>
+    <div class="logo-text">Aspirant<span>Hub</span></div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" data-exam="upsc">UPSC</div>
+    <div class="tab" data-exam="neet">NEET</div>
+    <div class="tab" data-exam="jee">JEE</div>
+    <div class="tab" data-exam="clat">CLAT</div>
+    <div class="tab" data-exam="cuet">CUET</div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1 id="examTitle">UPSC Previous Year Papers (Last 10 Years)</h1>
+  <p>Click a paper to view it directly inside the platform.</p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Papers</h2>
+  <div class="papers" id="papersContainer"></div>
+</section>
+
+<footer>© 2026 Aspirant Hub • Last 10 Years Papers</footer>
+
+<div class="pdf-modal" id="pdfModal">
+  <div class="pdf-header">
+    <span>📄 Question Paper</span>
+    <button onclick="closePDF()">Close</button>
+  </div>
+  <div class="pdf-viewer">
+    <iframe id="pdfFrame"></iframe>
+  </div>
+</div>
+
+<script>
+// PDF Modal
+function openPDF(url){const modal=document.getElementById("pdfModal");document.getElementById("pdfFrame").src=url;modal.classList.add("show");}
+function closePDF(){const modal=document.getElementById("pdfModal");document.getElementById("pdfFrame").src="";modal.classList.remove("show");}
+
+// Scroll reveal
+function revealCards(){const cards=document.querySelectorAll('.card');const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');}});},{threshold:0.5});cards.forEach(card=>observer.observe(card));}
+
+// Exam Data
+const examData={
+  upsc:[
+    {year:"2024",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2024.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2024.pdf"}]},
+    {year:"2023",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2023.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2023.pdf"}]},
+    {year:"2022",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2022.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2022.pdf"}]},
+    {year:"2021",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2021.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2021.pdf"}]},
+    {year:"2020",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2020.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2020.pdf"}]},
+    {year:"2019",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2019.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2019.pdf"}]},
+    {year:"2018",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2018.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2018.pdf"}]},
+    {year:"2017",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2017.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2017.pdf"}]},
+    {year:"2016",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2016.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2016.pdf"}]},
+    {year:"2015",links:[{name:"Prelims GS",url:"https://www.upsc.gov.in/sites/default/files/GS1_2015.pdf"},{name:"Mains Essay",url:"https://www.upsc.gov.in/sites/default/files/Essay_2015.pdf"}]},
+  ],
+  neet:[
+    {year:"2024",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2024_QuestionPaper.pdf"}]},
+    {year:"2023",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2023_QuestionPaper.pdf"}]},
+    {year:"2022",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2022_QuestionPaper.pdf"}]},
+    {year:"2021",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2021_QuestionPaper.pdf"}]},
+    {year:"2020",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2020_QuestionPaper.pdf"}]},
+    {year:"2019",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2019_QuestionPaper.pdf"}]},
+    {year:"2018",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2018_QuestionPaper.pdf"}]},
+    {year:"2017",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2017_QuestionPaper.pdf"}]},
+    {year:"2016",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2016_QuestionPaper.pdf"}]},
+    {year:"2015",links:[{name:"NEET UG",url:"https://www.nta.ac.in/sites/default/files/NEET_UG_2015_QuestionPaper.pdf"}]},
+  ],
+  jee:[
+    {year:"2024",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2024/QuestionPaper.pdf"}]},
+    {year:"2023",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2023/QuestionPaper.pdf"}]},
+    {year:"2022",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2022/QuestionPaper.pdf"}]},
+    {year:"2021",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2021/QuestionPaper.pdf"}]},
+    {year:"2020",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2020/QuestionPaper.pdf"}]},
+    {year:"2019",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2019/QuestionPaper.pdf"}]},
+    {year:"2018",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2018/QuestionPaper.pdf"}]},
+    {year:"2017",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2017/QuestionPaper.pdf"}]},
+    {year:"2016",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2016/QuestionPaper.pdf"}]},
+    {year:"2015",links:[{name:"JEE Paper",url:"https://jeemain.nta.nic.in/pdf/2015/QuestionPaper.pdf"}]},
+  ],
+  clat:[
+    {year:"2024",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2024/questionpaper.pdf"}]},
+    {year:"2023",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2023/questionpaper.pdf"}]},
+    {year:"2022",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2022/questionpaper.pdf"}]},
+    {year:"2021",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2021/questionpaper.pdf"}]},
+    {year:"2020",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2020/questionpaper.pdf"}]},
+    {year:"2019",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2019/questionpaper.pdf"}]},
+    {year:"2018",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2018/questionpaper.pdf"}]},
+    {year:"2017",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2017/questionpaper.pdf"}]},
+    {year:"2016",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2016/questionpaper.pdf"}]},
+    {year:"2015",links:[{name:"CLAT Paper",url:"https://clat.ac.in/2015/questionpaper.pdf"}]},
+  ],
+  cuet:[
+    {year:"2024",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2024/questionpaper.pdf"}]},
+    {year:"2023",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2023/questionpaper.pdf"}]},
+    {year:"2022",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2022/questionpaper.pdf"}]},
+    {year:"2021",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2021/questionpaper.pdf"}]},
+    {year:"2020",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2020/questionpaper.pdf"}]},
+    {year:"2019",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2019/questionpaper.pdf"}]},
+    {year:"2018",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2018/questionpaper.pdf"}]},
+    {year:"2017",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2017/questionpaper.pdf"}]},
+    {year:"2016",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2016/questionpaper.pdf"}]},
+    {year:"2015",links:[{name:"CUET Paper",url:"https://cuet.nta.nic.in/2015/questionpaper.pdf"}]},
+  ]
+};
+
+// Render papers
+const container=document.getElementById("papersContainer");
+const examTitle=document.getElementById("examTitle");
+function renderExam(exam){
+  container.innerHTML="";
+  examData[exam].forEach(item=>{
+    const card=document.createElement("div");
+    card.className="card";
+    card.innerHTML=`<div class="year">${item.year}</div><div class="links">${item.links.map(l=>`<a href="#" onclick="openPDF('${l.url}')">${l.name}</a>`).join('')}</div>`;
+    container.appendChild(card);
+  });
+  examTitle.textContent=exam.toUpperCase()+" Previous Year Papers (Last 10 Years)";
+  revealCards();
+}
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderExam(tab.dataset.exam);
+  });
+});
+
+// Initial load
+renderExam('upsc');
+</script>
+</body>
+</html>

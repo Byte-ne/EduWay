@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspirant Intelligence Platform</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #6C63FF, #FF6584);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: #fff;
+}
+
+header {
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  animation: fadeInDown 1s ease forwards;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #f0f0f0;
+}
+
+main {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  animation: fadeInDown 1s ease;
+}
+
+/* Horizontal scroll container */
+.exam-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  width: 100%;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  cursor: grab;
+  animation: scrollLoop 60s linear infinite;
+  
+  /* Hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.exam-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Exam card */
+.exam-card {
+  flex: 0 0 250px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.4s, background 0.4s, box-shadow 0.4s;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.exam-card:hover {
+  transform: translateY(-15px) scale(1.05);
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.exam-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.exam-card p {
+  font-size: 0.95rem;
+}
+
+footer {
+  margin-top: auto;
+  padding: 1rem;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  width: 100%;
+  backdrop-filter: blur(5px);
+  color: #fff;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Continuous horizontal scroll animation */
+@keyframes scrollLoop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* adjust based on total width */
+}
+
+@media (max-width: 768px) {
+  .exam-card {
+    flex: 0 0 200px;
+    padding: 1.5rem;
+
+  }
+  
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Aspirant Intelligence Platform</h1>
+<p>Your centralized hub to track exam dates, analyze success probabilities, and access resources.</p>
+</header>
+
+<main>
+<h2>Select Your Exam</h2>
+<div class="exam-list">
+    <div class="exam-card" onclick="redirectExam('jee')"><h3>JEE Main & Advanced</h3><p>Engineering entrance exam dashboard.</p></div>
+    <div class="exam-card" onclick="redirectExam('neet')"><h3>NEET</h3><p>Medical entrance exam preparation.</p></div>
+    <div class="exam-card" onclick="redirectExam('clat')"><h3>CLAT</h3><p>Law entrance exam dashboard.</p></div>
+    <div class="exam-card" onclick="redirectExam('gate')"><h3>GATE</h3><p>Engineering postgraduate entrance.</p></div>
+    <div class="exam-card" onclick="redirectExam('upsc')"><h3>UPSC Civil Services</h3><p>IAS/IPS preparation dashboard.</p></div>
+    <div class="exam-card" onclick="redirectExam('ssc')"><h3>SSC CGL & CHSL</h3><p>Staff Selection Commission exams.</p></div>
+    <div class="exam-card" onclick="redirectExam('bank')"><h3>Bank Exams</h3><p>IBPS, SBI, RBI exam tracking.</p></div>
+    <div class="exam-card" onclick="redirectExam('cat')"><h3>CAT</h3><p>MBA entrance exam preparation.</p></div>
+    <div class="exam-card" onclick="redirectExam('neetpg')"><h3>NEET PG</h3><p>Postgraduate medical entrance exam.</p></div>
+    <div class="exam-card" onclick="redirectExam('defence')"><h3>Defence Exams</h3><p>UPSC/NDA/CDS dashboard.</p></div>
+    <div class="exam-card" onclick="redirectExam('iti')"><h3>ITI Exams</h3><p>Industrial Training Institutes entrance.</p></div>
+    <div class="exam-card" onclick="redirectExam('sscjd')"><h3>SSC Junior Dev.</h3><p>Junior-level government exam tracking.</p></div>
+    <div class="exam-card" onclick="redirectExam('neetug')"><h3>NEET UG</h3><p>Undergraduate medical exam dashboard.</p></div>
+    <div class="exam-card" onclick="redirectExam('clerk')"><h3>Clerk & PO Exams</h3><p>Bank and govt clerk preparation.</p></div>
+    <div class="exam-card" onclick="redirectExam('others')"><h3>Other Exams</h3><p>All other competitive exams in one place.</p></div>
+</div>
+</main>
+
+<footer>
+&copy; 2026 Aspirant Intelligence Platform. All rights reserved.
+</footer>
+
+<script>
+function redirectExam(exam) {
+    const dashboards = {
+        jee: 'jee_dashboard.html',
+        neet: 'neet_dashboard.html',
+        clat: 'clat_dashboard.html',
+        gate: 'gate_dashboard.html',
+        upsc: 'upsc_dashboard.html',
+        ssc: 'ssc_dashboard.html',
+        bank: 'bank_dashboard.html',
+        cat: 'cat_dashboard.html',
+        neetpg: 'neet_pg_dashboard.html',
+        defence: 'defence_dashboard.html',
+        iti: 'iti_dashboard.html',
+        sscjd: 'ssc_jd_dashboard.html',
+        neetug: 'neet_ug_dashboard.html',
+        clerk: 'clerk_dashboard.html',
+        others: 'others_dashboard.html'
+    };
+    if(dashboards[exam]) {
+        window.location.href = dashboards[exam];
+    } else {
+        alert('Dashboard not available yet!');
+    }
+}
+
+// Drag to scroll for desktop
+const slider = document.querySelector('.exam-list');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  slider.classList.add('active');
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+});
+slider.addEventListener('mouseleave', () => isDown = false);
+slider.addEventListener('mouseup', () => isDown = false);
+slider.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2; //scroll-fast
+  slider.scrollLeft = scrollLeft - walk;
+});
+</script>
+</body>
+</html>

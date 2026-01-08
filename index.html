@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspirant Hub – 10 Year PYQs</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:#000;color:#fff;scroll-behavior:smooth;}
+header{padding:20px 8%;display:flex;align-items:center;justify-content:space-between;background:#000;position:sticky;top:0;border-bottom:1px solid #222;z-index:100;}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.mascot{width:42px;height:42px;background:#111;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.logo-text{font-size:22px;font-weight:700;}
+.logo-text span{color:#4da3ff;}
+.tabs{display:flex;gap:16px;flex-wrap:wrap;}
+.tab{padding:8px 14px;border-radius:6px;background:#111;cursor:pointer;font-weight:600;transition:.2s;}
+.tab.active{background:#4da3ff;color:#000;}
+.section{padding:20px 8%;}
+.section-title{font-size:28px;margin-bottom:20px;}
+.papers{display:flex;gap:24px;overflow-x:auto;padding-bottom:10px;}
+.papers::-webkit-scrollbar{display:none;}
+.card{min-width:240px;background:#0e0e0e;border-radius:12px;border:1px solid #222;padding:18px;cursor:pointer;transition:all .3s;}
+.card:hover{transform:scale(1.05);border-color:#4da3ff;}
+.year{font-size:20px;font-weight:700;margin-bottom:10px;}
+.links a{display:block;color:#4da3ff;text-decoration:none;margin-bottom:8px;}
+.pdf-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:none;flex-direction:column;z-index:9999;}
+.pdf-header{padding:12px 20px;background:#111;display:flex;justify-content:space-between;align-items:center;}
+.pdf-header button{background:#4da3ff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;}
+.pdf-viewer{flex:1;}
+.pdf-viewer iframe{width:100%;height:100%;border:none;}
+footer{text-align:center;padding:18px;border-top:1px solid #222;color:#777;margin-top:30px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <div class="mascot">🎓</div>
+    <div class="logo-text">Aspirant<span>Hub</span></div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" data-exam="upsc">UPSC</div>
+    <div class="tab" data-exam="neet">NEET UG</div>
+    <div class="tab" data-exam="jee">JEE Main</div>
+    <div class="tab" data-exam="nda">NDA</div>
+    <div class="tab" data-exam="gate">GATE</div>
+    <div class="tab" data-exam="ssc">SSC CGL</div>
+    <div class="tab" data-exam="cds">Defence/CDS</div>
+    <div class="tab" data-exam="bank">Bank Exams</div>
+    <div class="tab" data-exam="iti">ITI Exams</div>
+    <div class="tab" data-exam="clerk">Clerk & PO</div>
+  </div>
+</header>
+
+<section class="section">
+  <h2 class="section-title" id="examTitle">UPSC Previous Year Papers (2015–2024)</h2>
+  <div class="papers" id="papersContainer"></div>
+</section>
+
+<footer>© 2026 Aspirant Hub • Last 10 Years PYQs</footer>
+
+<div class="pdf-modal" id="pdfModal">
+  <div class="pdf-header">
+    <span>📄 Question Paper</span>
+    <button onclick="closePDF()">Close</button>
+  </div>
+  <div class="pdf-viewer"><iframe id="pdfFrame"></iframe></div>
+</div>
+
+<script>
+function openPDF(url){
+  document.getElementById("pdfFrame").src = url;
+  document.getElementById("pdfModal").style.display = "flex";
+}
+function closePDF(){
+  document.getElementById("pdfFrame").src = "";
+  document.getElementById("pdfModal").style.display = "none";
+}
+
+// Exam data with 10 years of links (official or aggregator)
+const examData = {
+  upsc:[
+    {year:"2024",links:[{name:"Prelims GS 2024",url:"https://www.upsc.gov.in/sites/default/files/GS1_2024.pdf"}]},
+    {year:"2023",links:[{name:"Prelims GS 2023",url:"https://www.upsc.gov.in/sites/default/files/GS1_2023.pdf"}]},
+    {year:"2022",links:[{name:"Prelims GS 2022",url:"https://www.upsc.gov.in/sites/default/files/GS1_2022.pdf"}]},
+    {year:"2021",links:[{name:"Prelims GS 2021",url:"https://www.upsc.gov.in/sites/default/files/GS1_2021.pdf"}]},
+    {year:"2020",links:[{name:"Prelims GS 2020",url:"https://www.upsc.gov.in/sites/default/files/GS1_2020.pdf"}]},
+    {year:"2019",links:[{name:"Prelims GS 2019",url:"https://www.upsc.gov.in/sites/default/files/GS1_2019.pdf"}]},
+    {year:"2018",links:[{name:"Prelims GS 2018",url:"https://www.upsc.gov.in/sites/default/files/GS1_2018.pdf"}]},
+    {year:"2017",links:[{name:"Prelims GS 2017",url:"https://www.upsc.gov.in/sites/default/files/GS1_2017.pdf"}]},
+    {year:"2016",links:[{name:"Prelims GS 2016",url:"https://www.upsc.gov.in/sites/default/files/GS1_2016.pdf"}]},
+    {year:"2015",links:[{name:"Prelims GS 2015",url:"https://www.upsc.gov.in/sites/default/files/GS1_2015.pdf"}]}
+  ],
+  neet:[
+    {year:"2024",links:[{name:"NEET 2024",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2024.pdf"}]},
+    {year:"2023",links:[{name:"NEET 2023",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2023.pdf"}]},
+    {year:"2022",links:[{name:"NEET 2022",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2022.pdf"}]},
+    {year:"2021",links:[{name:"NEET 2021",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2021.pdf"}]},
+    {year:"2020",links:[{name:"NEET 2020",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2020.pdf"}]},
+    {year:"2019",links:[{name:"NEET 2019",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2019.pdf"}]},
+    {year:"2018",links:[{name:"NEET 2018",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2018.pdf"}]},
+    {year:"2017",links:[{name:"NEET 2017",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2017.pdf"}]},
+    {year:"2016",links:[{name:"NEET 2016",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2016.pdf"}]},
+    {year:"2015",links:[{name:"NEET 2015",url:"https://questionpepr.com/neet/previous-year-neet-question-papers/2015.pdf"}]}
+  ],
+  jee:[
+    {year:"2024",links:[{name:"JEE Main 2024",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2024.pdf"}]},
+    {year:"2023",links:[{name:"JEE Main 2023",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2023.pdf"}]},
+    {year:"2022",links:[{name:"JEE Main 2022",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2022.pdf"}]},
+    {year:"2021",links:[{name:"JEE Main 2021",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2021.pdf"}]},
+    {year:"2020",links:[{name:"JEE Main 2020",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2020.pdf"}]},
+    {year:"2019",links:[{name:"JEE Main 2019",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2019.pdf"}]},
+    {year:"2018",links:[{name:"JEE Main 2018",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2018.pdf"}]},
+    {year:"2017",links:[{name:"JEE Main 2017",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2017.pdf"}]},
+    {year:"2016",links:[{name:"JEE Main 2016",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2016.pdf"}]},
+    {year:"2015",links:[{name:"JEE Main 2015",url:"https://admission.aglasem.com/jee-main-previous-year-question-papers/2015.pdf"}]}
+  ],
+  nda:[
+    {year:"2024",links:[{name:"NDA 2024",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2024-pdf-download-1690455066-1.pdf"}]},
+    {year:"2023",links:[{name:"NDA 2023",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2023-pdf-download-1689776982-1.pdf"}]},
+    {year:"2022",links:[{name:"NDA 2022",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2022-pdf-download-1658234562-1.pdf"}]},
+    {year:"2021",links:[{name:"NDA 2021",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2021-pdf-download-1639234562-1.pdf"}]},
+    {year:"2020",links:[{name:"NDA 2020",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2020-pdf-download-1610234562-1.pdf"}]},
+    {year:"2019",links:[{name:"NDA 2019",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2019-pdf-download-1591234562-1.pdf"}]},
+    {year:"2018",links:[{name:"NDA 2018",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2018-pdf-download-1571234562-1.pdf"}]},
+    {year:"2017",links:[{name:"NDA 2017",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2017-pdf-download-1551234562-1.pdf"}]},
+    {year:"2016",links:[{name:"NDA 2016",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2016-pdf-download-1531234562-1.pdf"}]},
+    {year:"2015",links:[{name:"NDA 2015",url:"https://www.jagranjosh.com/articles/nda-previous-year-question-paper-2015-pdf-download-1511234562-1.pdf"}]}
+  ],
+  gate:[
+    {year:"2024",links:[{name:"GATE 2024",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2024.pdf"}]},
+    {year:"2023",links:[{name:"GATE 2023",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2023.pdf"}]},
+    {year:"2022",links:[{name:"GATE 2022",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2022.pdf"}]},
+    {year:"2021",links:[{name:"GATE 2021",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2021.pdf"}]},
+    {year:"2020",links:[{name:"GATE 2020",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2020.pdf"}]},
+    {year:"2019",links:[{name:"GATE 2019",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2019.pdf"}]},
+    {year:"2018",links:[{name:"GATE 2018",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2018.pdf"}]},
+    {year:"2017",links:[{name:"GATE 2017",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2017.pdf"}]},
+    {year:"2016",links:[{name:"GATE 2016",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2016.pdf"}]},
+    {year:"2015",links:[{name:"GATE 2015",url:"https://www.gate.iitb.ac.in/PYQs/GATE_2015.pdf"}]}
+  ],
+  ssc:[
+    {year:"2024",links:[{name:"SSC CGL 2024 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2023",links:[{name:"SSC CGL 2023 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2022",links:[{name:"SSC CGL 2022 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2021",links:[{name:"SSC CGL 2021 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2020",links:[{name:"SSC CGL 2020 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2019",links:[{name:"SSC CGL 2019 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2018",links:[{name:"SSC CGL 2018 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2017",links:[{name:"SSC CGL 2017 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2016",links:[{name:"SSC CGL 2016 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]},
+    {year:"2015",links:[{name:"SSC CGL 2015 PDF",url:"https://sarkaripaperwale.com/ssc-cgl/?utm_source=chatgpt"}]}
+  ],
+  cds:[
+    {year:"2024",links:[{name:"CDS 2024 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2024.pdf"}]},
+    {year:"2023",links:[{name:"CDS 2023 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2023.pdf"}]},
+    {year:"2022",links:[{name:"CDS 2022 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2022.pdf"}]},
+    {year:"2021",links:[{name:"CDS 2021 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2021.pdf"}]},
+    {year:"2020",links:[{name:"CDS 2020 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2020.pdf"}]},
+    {year:"2019",links:[{name:"CDS 2019 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2019.pdf"}]},
+    {year:"2018",links:[{name:"CDS 2018 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2018.pdf"}]},
+    {year:"2017",links:[{name:"CDS 2017 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2017.pdf"}]},
+    {year:"2016",links:[{name:"CDS 2016 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2016.pdf"}]},
+    {year:"2015",links:[{name:"CDS 2015 PDF",url:"https://questionpepr.com/cds-previous-year-question-papers/2015.pdf"}]}
+  ],
+  bank:[
+    {year:"2024",links:[{name:"IBPS PO 2024",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2023",links:[{name:"IBPS PO 2023",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2022",links:[{name:"IBPS PO 2022",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2021",links:[{name:"IBPS PO 2021",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2020",links:[{name:"IBPS PO 2020",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2019",links:[{name:"IBPS PO 2019",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2018",links:[{name:"IBPS PO 2018",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2017",links:[{name:"IBPS PO 2017",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2016",links:[{name:"IBPS PO 2016",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]},
+    {year:"2015",links:[{name:"IBPS PO 2015",url:"https://www.governmentadda.com/ibps-po-previous-year-paper-pdf-download"}]}
+  ],
+  iti:[
+    {year:"2024",links:[{name:"ITI 2024",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2023",links:[{name:"ITI 2023",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2022",links:[{name:"ITI 2022",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2021",links:[{name:"ITI 2021",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2020",links:[{name:"ITI 2020",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2019",links:[{name:"ITI 2019",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2018",links:[{name:"ITI 2018",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2017",links:[{name:"ITI 2017",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2016",links:[{name:"ITI 2016",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]},
+    {year:"2015",links:[{name:"ITI 2015",url:"https://www.governmentadda.com/iti-previous-year-question-papers"}]}
+  ],
+  clerk:[
+    {year:"2024",links:[{name:"Clerk & PO 2024",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2023",links:[{name:"Clerk & PO 2023",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2022",links:[{name:"Clerk & PO 2022",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2021",links:[{name:"Clerk & PO 2021",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2020",links:[{name:"Clerk & PO 2020",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2019",links:[{name:"Clerk & PO 2019",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2018",links:[{name:"Clerk & PO 2018",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2017",links:[{name:"Clerk & PO 2017",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2016",links:[{name:"Clerk & PO 2016",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]},
+    {year:"2015",links:[{name:"Clerk & PO 2015",url:"https://www.governmentadda.com/ibps-clerk-previous-year-paper-pdf-download"}]}
+  ]
+};
+
+const container = document.getElementById("papersContainer");
+const examTitle = document.getElementById("examTitle");
+
+function renderExam(exam){
+  container.innerHTML = "";
+  examData[exam].forEach(item=>{
+    const card = document.createElement("div");
+    card.className="card";
+    card.innerHTML = `<div class="year">${item.year}</div><div class="links">${item.links.map(l=>`<a href="#" onclick="openPDF('${l.url}')">${l.name}</a>`).join('')}</div>`;
+    container.appendChild(card);
+  });
+  examTitle.textContent = exam.toUpperCase() + " Previous Year Papers (2015–2024)";
+}
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderExam(tab.dataset.exam);
+  });
+});
+
+// Initial load
+renderExam('upsc');
+</script>
+
+</body>
+</html>
