@@ -111,7 +111,7 @@ router.delete('/:id/messages/:messageId', async (req, res) => {
 
         // Check if user is a member of the group
         if (!g.members.map(m => m.toString()).includes(userId)) {
-            return res.status(403).json({ message: 'Not allowed' })
+            return res.status(403).json({ message: 'Not allowed - you are not a member of this group' })
         }
 
         // Find and remove the message
@@ -120,11 +120,8 @@ router.delete('/:id/messages/:messageId', async (req, res) => {
             return res.status(404).json({ message: 'Message not found' })
         }
 
-        // Check if user is the author of the message (or allow group admins to delete any message)
-        const message = g.messages[messageIndex]
-        if (message.author.toString() !== userId) {
-            return res.status(403).json({ message: 'Can only delete your own messages' })
-        }
+        // Allow any group member to delete messages (similar to most chat applications)
+        // No additional author check needed since membership was already verified above
 
         g.messages.splice(messageIndex, 1)
         await g.save()
@@ -136,4 +133,44 @@ router.delete('/:id/messages/:messageId', async (req, res) => {
     }
 })
 
+// Delete entire group
+router.delete('/:id', async (req, res) => {
+    try {
+        const userId = getUserIdFromHeader(req)
+        if (!userId) return res.status(401).json({ message: 'Unauthorized' })
+
+        const g = await Group.findById(req.params.id)
+        if (!g) return res.status(404).json({ message: 'Group not found' })
+
+        // Check if user is a member of the group (for now, allow any member to delete)
+        // In a production app, you might want to restrict this to group creators/admins
+        if (!g.members.map(m => m.toString()).includes(userId)) {
+            return res.status(403).json({ message: 'Not allowed - you are not a member of this group' })
+        }
+
+        // Delete the group
+        await Group.findByIdAndDelete(req.params.id)
+
+        res.json({ message: 'Group deleted successfully' })
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: 'Server error' })
+    }
+})
+
+// Delete all groups (admin function)
+router.delete('/', async (req, res) => {
+    try {
+        const result = await Group.deleteMany({})
+        res.json({
+            message: 'All groups deleted successfully',
+            deletedCount: result.deletedCount
+        })
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' })
+    }
+})
+
 module.exports = router
+

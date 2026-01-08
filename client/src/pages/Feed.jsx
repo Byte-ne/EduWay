@@ -764,12 +764,13 @@ export default function Feed() {
                         <div style={{ display: 'flex', gap: 16 }}>
                             <div style={{ width: groupsCollapsed ? 72 : 320, transition: 'width 180ms' }}>
                                 <div style={{ marginBottom: 12, display: 'flex', gap: 8, alignItems: 'center' }}>
-                                    {!groupsCollapsed && <button type="button" onClick={async () => { const g = await createGroup('New Group'); if (g) selectGroup(g._id); }} style={{ flex: 1, padding: 10, borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>New Group</button>}
+                                    <button type="button" onClick={async () => { const g = await createGroup('New Group'); if (g) selectGroup(g._id); }} style={{ flex: 1, padding: 10, borderRadius: 8, background: 'var(--primary)', color: '#fff', border: 'none', fontSize: groupsCollapsed ? '12px' : '14px' }}>
+                                        {groupsCollapsed ? '+' : 'New Group'}
+                                    </button>
                                     <button type="button" onClick={() => loadGroups()} style={{ padding: 10, borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Refresh</button>
                                     <button type="button" onClick={() => setGroupsCollapsed(s => !s)} style={{ padding: 8, borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>
                                         {groupsCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
                                     </button>
-
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                     {groups.length > 0 ? groups.map(g => (
