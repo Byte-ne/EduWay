@@ -6,8 +6,7 @@ function Sidebar({ active, setActive }) {
     const tabs = [
         { key: 'home', label: 'Home', icon: Home },
         { key: 'trending', label: 'Trending Exams', icon: TrendingUp },
-        { key: 'groups', label: 'Study Groups', icon: Users },
-        { key: 'challenge', label: 'Challenge', icon: Lightbulb }
+        { key: 'groups', label: 'Study Groups', icon: Users }
     ]
 
     return (
@@ -430,13 +429,7 @@ export default function Feed() {
     const [memberSearchResults, setMemberSearchResults] = useState([])
     const [renaming, setRenaming] = useState(false)
     const [newGroupName, setNewGroupName] = useState('')
-    const [challengeExam, setChallengeExam] = useState('JEE')
-    const [challengeBuddy, setChallengeBuddy] = useState(null)
-    const [challengeActive, setChallengeActive] = useState(false)
-    const [challengeData, setChallengeData] = useState(null)
-    const [buddyOptions, setBuddyOptions] = useState([])
-    const [answersState, setAnswersState] = useState({})
-    const [hideSidebars, setHideSidebars] = useState(false)
+
 
     // create post state
     const [creating, setCreating] = useState(false)
@@ -475,25 +468,7 @@ export default function Feed() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeTab])
 
-    // load study buddy details for selection (best-effort)
-    useEffect(() => {
-        async function loadBuddies() {
-            try {
-                const token = localStorage.getItem('token')
-                if (!user || !user.studyBuddies || user.studyBuddies.length === 0) { setBuddyOptions([]); return }
-                const items = await Promise.all(user.studyBuddies.map(async id => {
-                    try {
-                        const res = await fetch(`http://localhost:5000/api/users/search?q=${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${token}` } })
-                        const d = await res.json()
-                        if (Array.isArray(d) && d.length) return d[0]
-                    } catch (e) { }
-                    return null
-                }))
-                setBuddyOptions(items.filter(Boolean))
-            } catch (e) { setBuddyOptions([]) }
-        }
-        loadBuddies()
-    }, [user])
+
 
     async function searchMember(q) {
         try {
@@ -571,20 +546,7 @@ export default function Feed() {
                 return prev
             })
         })
-        // challenge start listener
-        socket.on('challenge:start', ({ challengeId, challenger, recipient, questions, exam }) => {
-            const meId = localStorage.getItem('userId')
-            // if current user is participant, switch to feed and start animation/challenge
-            if (meId === challenger || meId === recipient) {
-                setActiveTab('home')
-                // small timeout to simulate redirect animation
-                setTimeout(() => {
-                    setHideSidebars(true)
-                    setChallengeActive(true)
-                    setChallengeData({ challengeId, questions, exam })
-                }, 500)
-            }
-        })
+
         return () => { socket.disconnect() }
     }, [])
 
@@ -707,7 +669,7 @@ export default function Feed() {
             maxWidth: '1400px',
             margin: '0 auto'
         }}>
-            {!hideSidebars && <Sidebar active={activeTab} setActive={setActiveTab} />}
+            <Sidebar active={activeTab} setActive={setActiveTab} />
 
             <main style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ marginBottom: '24px' }}>
@@ -729,7 +691,7 @@ export default function Feed() {
                 </div>
 
                 {/* Create Post Card */}
-                {!challengeActive && activeTab !== 'groups' && (
+                {activeTab !== 'groups' && (
                     <div style={{ marginBottom: '18px', background: 'var(--white)', padding: 16, borderRadius: 12 }}>
                         <form onSubmit={createPost}>
                             <input value={postTitle} onChange={e => setPostTitle(e.target.value)} placeholder="Title (optional)" style={{ width: '100%', padding: 10, marginBottom: 8, borderRadius: 8, border: '1px solid var(--border-light)' }} />
@@ -751,52 +713,6 @@ export default function Feed() {
                                 <button type="submit" disabled={creating} style={{ padding: '8px 12px', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>{creating ? 'Posting...' : 'Post'}</button>
                             </div>
                         </form>
-                    </div>
-                )}
-
-                {/* If a challenge is active, render immersive challenge UI */}
-                {challengeActive && challengeData && (
-                    <div style={{ background: 'var(--white)', padding: 20, borderRadius: 12, boxShadow: 'var(--shadow-md)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-                            <h3 style={{ margin: 0 }}>Challenge — {challengeData.exam}</h3>
-                            <div style={{ color: 'var(--text-secondary)' }}>Good luck!</div>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                            {(challengeData.questions || []).map((q, qi) => (
-                                <div key={qi} style={{ padding: 12, borderRadius: 8, background: 'var(--off-white)' }}>
-                                    <div style={{ fontWeight: 700, marginBottom: 8 }}>{qi + 1}. {q.question}</div>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                                        {(q.options || []).map((opt, oi) => (
-                                            <label key={oi} style={{ display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer' }}>
-                                                <input type="radio" name={`q-${qi}`} checked={answersState[qi] === oi} onChange={() => setAnswersState(s => ({ ...s, [qi]: oi }))} />
-                                                <span>{opt}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-
-                            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-                                <button type="button" onClick={async () => {
-                                    const all = (challengeData.questions || []).length
-                                    const answered = Object.keys(answersState).length
-                                    if (answered < all) return alert('Please answer all questions before submitting')
-                                    try {
-                                        const token = localStorage.getItem('token')
-                                        const payload = Object.keys(answersState).map(k => ({ qIndex: parseInt(k, 10), choice: answersState[k] }))
-                                        const res = await fetch(`http://localhost:5000/api/challenges/${challengeData.challengeId}/submit`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ answers: payload }) })
-                                        const d = await res.json()
-                                        if (res.ok) {
-                                            alert('Submitted — your score: ' + (d.score || 0))
-                                            setChallengeActive(false)
-                                            setHideSidebars(false)
-                                            // refresh feed
-                                            load()
-                                        } else alert(d.message || 'Failed')
-                                    } catch (e) { alert('Submission failed') }
-                                }} style={{ padding: 8, border: 'none', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff' }}>Submit</button>
-                            </div>
-                        </div>
                     </div>
                 )}
 
@@ -843,14 +759,7 @@ export default function Feed() {
                                     <button type="button" onClick={() => setGroupsCollapsed(s => !s)} style={{ padding: 8, borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>
                                         {groupsCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
                                     </button>
-                                    {!groupsCollapsed && <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                                        <select value={challengeExam} onChange={e => setChallengeExam(e.target.value)} style={{ padding: 8, borderRadius: 8 }}>
-                                            <option>JEE</option>
-                                            <option>NEET</option>
-                                            <option>UPSC</option>
-                                        </select>
-                                        <button type="button" onClick={() => setActive('challenge')} style={{ padding: 8, borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Open Challenge</button>
-                                    </div>}
+
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                     {groups.length > 0 ? groups.map(g => (
@@ -912,59 +821,16 @@ export default function Feed() {
                                                 </div>
                                             ))}
                                         </div>
-                                        {!hideSidebars && <div style={{ display: 'flex', gap: 8 }}>
+                                        <div style={{ display: 'flex', gap: 8 }}>
                                             <input value={groupMessageText} onChange={e => setGroupMessageText(e.target.value)} placeholder="Write a message" style={{ flex: 1, padding: 10, borderRadius: 8, border: '1px solid var(--border-light)' }} />
                                             <button type="button" onClick={async () => { if (groupMessageText.trim()) { await sendGroupMessage(selectedGroup._id, groupMessageText); setGroupMessageText('') } }} style={{ padding: '10px 12px', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Send</button>
-                                        </div>}
+                                        </div>
                                     </div>
                                 ) : (
                                     <div style={{ padding: 20, color: 'var(--text-secondary)' }}>Select a group to open the chat</div>
                                 )}
                             </div>
-                            {/* Challenge UI */}
-                            {activeTab === 'groups' && <div style={{ width: 420 }}>
-                                <div style={{ background: 'var(--white)', padding: 12, borderRadius: 12 }}>
-                                    <h4>Challenge</h4>
-                                    <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
-                                        <select value={challengeExam} onChange={e => setChallengeExam(e.target.value)} style={{ flex: 1, padding: 8 }}>
-                                            <option>JEE</option>
-                                            <option>NEET</option>
-                                            <option>UPSC</option>
-                                        </select>
-                                        {buddyOptions && buddyOptions.length > 0 ? (
-                                            <select value={challengeBuddy || ''} onChange={e => setChallengeBuddy(e.target.value)} style={{ padding: 8, flex: 1 }}>
-                                                <option value="">Select buddy</option>
-                                                {buddyOptions.map(b => (
-                                                    <option key={b._id} value={b._id}>{b.name}{b.username ? ` (${b.username})` : ''}</option>
-                                                ))}
-                                            </select>
-                                        ) : (
-                                            <input placeholder="Buddy id or username" value={challengeBuddy || ''} onChange={e => setChallengeBuddy(e.target.value)} style={{ padding: 8, flex: 1 }} />
-                                        )}
-                                    </div>
-                                    <div style={{ display: 'flex', gap: 8 }}>
-                                        <button type="button" onClick={async () => {
-                                            if (!challengeBuddy) return alert('Enter buddy id or username')
-                                            try {
-                                                // resolve username -> id by searching
-                                                const token = localStorage.getItem('token')
-                                                let uid = challengeBuddy
-                                                if (!/^[0-9a-fA-F]{24}$/.test(challengeBuddy)) {
-                                                    const res = await fetch(`http://localhost:5000/api/users/search?q=${encodeURIComponent(challengeBuddy)}`, { headers: { Authorization: `Bearer ${token}` } })
-                                                    const data = await res.json()
-                                                    if (Array.isArray(data) && data.length) uid = data[0]._id
-                                                    else return alert('Buddy not found')
-                                                }
-                                                const res2 = await fetch('http://localhost:5000/api/challenges/request', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ toUserId: uid, exam: challengeExam }) })
-                                                const d2 = await res2.json()
-                                                if (res2.ok) alert('Challenge request sent')
-                                                else alert(d2.message || 'Failed')
-                                            } catch (e) { alert('Failed') }
-                                        }} style={{ padding: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Send</button>
-                                        <button type="button" onClick={() => { setChallengeBuddy('') }} style={{ padding: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Clear</button>
-                                    </div>
-                                </div>
-                            </div>}
+
                             {/* Add member modal */}
                             {addMemberModal.open && (
                                 <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.35)', zIndex: 60 }} onClick={() => setAddMemberModal({ open: false, groupId: null })}>
@@ -992,88 +858,50 @@ export default function Feed() {
                                 </div>
                             )}
                         </div>
+                    ) : displayedPosts.length > 0 ? (
+                        displayedPosts.map(p => (
+                            <PostCard
+                                key={p._id}
+                                p={p}
+                                onLike={like}
+                                onComment={comment}
+                                onStudyRequest={studyRequest}
+                            />
+                        ))
                     ) : (
-                        activeTab === 'challenge' ? (
-                            <div style={{ padding: 12, background: 'var(--white)', borderRadius: 12 }}>
-                                <h3>Send a Challenge</h3>
-                                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                                    <select value={challengeExam} onChange={e => setChallengeExam(e.target.value)} style={{ padding: 8 }}>
-                                        <option>JEE</option>
-                                        <option>NEET</option>
-                                        <option>UPSC</option>
-                                    </select>
-                                    {buddyOptions && buddyOptions.length > 0 ? (
-                                        <select value={challengeBuddy || ''} onChange={e => setChallengeBuddy(e.target.value)} style={{ padding: 8 }}>
-                                            <option value="">Select buddy</option>
-                                            {buddyOptions.map(b => (<option key={b._id} value={b._id}>{b.name}{b.username ? ` (${b.username})` : ''}</option>))}
-                                        </select>
-                                    ) : (
-                                        <input placeholder="Buddy id or username" value={challengeBuddy || ''} onChange={e => setChallengeBuddy(e.target.value)} style={{ padding: 8 }} />
-                                    )}
-                                    <button type="button" onClick={async () => {
-                                        if (!challengeBuddy) return alert('Choose a buddy')
-                                        try {
-                                            const token = localStorage.getItem('token')
-                                            let uid = challengeBuddy
-                                            if (!/^[0-9a-fA-F]{24}$/.test(challengeBuddy)) {
-                                                const res = await fetch(`http://localhost:5000/api/users/search?q=${encodeURIComponent(challengeBuddy)}`, { headers: { Authorization: `Bearer ${token}` } })
-                                                const data = await res.json()
-                                                if (Array.isArray(data) && data.length) uid = data[0]._id
-                                                else return alert('Buddy not found')
-                                            }
-                                            const res2 = await fetch('http://localhost:5000/api/challenges/request', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ toUserId: uid, exam: challengeExam }) })
-                                            const d2 = await res2.json()
-                                            if (res2.ok) alert('Challenge request sent')
-                                            else alert(d2.message || 'Failed')
-                                        } catch (e) { alert('Failed') }
-                                    }} style={{ padding: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Send</button>
-                                </div>
-                            </div>
-                        ) : displayedPosts.length > 0 ? (
-                            displayedPosts.map(p => (
-                                <PostCard
-                                    key={p._id}
-                                    p={p}
-                                    onLike={like}
-                                    onComment={comment}
-                                    onStudyRequest={studyRequest}
-                                />
-                            ))
-                        ) : (
-                            <div style={{
-                                background: 'var(--white)',
-                                padding: '60px 40px',
-                                borderRadius: 'var(--radius-xl)',
-                                textAlign: 'center',
-                                boxShadow: 'var(--shadow-md)'
+                        <div style={{
+                            background: 'var(--white)',
+                            padding: '60px 40px',
+                            borderRadius: 'var(--radius-xl)',
+                            textAlign: 'center',
+                            boxShadow: 'var(--shadow-md)'
+                        }}>
+                            <MapPin size={64} style={{
+                                color: 'var(--border-medium)',
+                                marginBottom: '20px',
+                                opacity: 0.5
+                            }} />
+                            <h3 style={{
+                                color: 'var(--text-primary)',
+                                fontSize: '20px',
+                                fontWeight: '600',
+                                marginBottom: '8px'
                             }}>
-                                <MapPin size={64} style={{
-                                    color: 'var(--border-medium)',
-                                    marginBottom: '20px',
-                                    opacity: 0.5
-                                }} />
-                                <h3 style={{
-                                    color: 'var(--text-primary)',
-                                    fontSize: '20px',
-                                    fontWeight: '600',
-                                    marginBottom: '8px'
-                                }}>
-                                    No posts yet
-                                </h3>
-                                <p style={{
-                                    color: 'var(--text-secondary)',
-                                    fontSize: '15px',
-                                    margin: 0
-                                }}>
-                                    Be the first to share your study journey with the community!
-                                </p>
-                            </div>
-                        )
+                                No posts yet
+                            </h3>
+                            <p style={{
+                                color: 'var(--text-secondary)',
+                                fontSize: '15px',
+                                margin: 0
+                            }}>
+                                Be the first to share your study journey with the community!
+                            </p>
+                        </div>
                     )
                 )}
             </main>
 
-            {!hideSidebars && <RightSidebar />}
+            <RightSidebar />
         </div>
     )
 }

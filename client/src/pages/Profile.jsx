@@ -390,8 +390,8 @@ export default function Profile() {
                                     {!loadingNotifications && notifications && notifications.length > 0 && (
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 12 }}>
                                             <div style={{ fontWeight: 700 }}>Requests</div>
-                                            {notifications.map((n, idx) => (
-                                                n.type === 'buddy_request' ? (
+                                            {notifications.map((n, idx) => {
+                                                if (n.type === 'buddy_request') return (
                                                     <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 8, background: 'var(--off-white)', borderRadius: 8 }}>
                                                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                                                             {n.from && n.from.profilePic ? <img src={n.from.profilePic} alt={n.from.name} style={{ width: 36, height: 36, borderRadius: 999, objectFit: 'cover' }} /> : <div style={{ width: 36, height: 36, borderRadius: 999, background: 'var(--primary-blue)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{(n.from && n.from.name ? n.from.name.charAt(0).toUpperCase() : 'U')}</div>}
@@ -414,8 +414,46 @@ export default function Profile() {
                                                             }} style={{ padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Reject</button>
                                                         </div>
                                                     </div>
-                                                ) : null
-                                            ))}
+                                                )
+
+                                                if (n.type === 'challenge_request') return (
+                                                    <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 8, background: 'var(--off-white)', borderRadius: 8 }}>
+                                                        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                                                            <div style={{ width: 36, height: 36, borderRadius: 999, background: 'var(--primary-blue)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{(n.from && n.from.name ? n.from.name.charAt(0).toUpperCase() : 'C')}</div>
+                                                            <div>
+                                                                <div style={{ fontWeight: 600 }}>{n.from?.name || 'User'}</div>
+                                                                <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{n.text}</div>
+                                                                <div style={{ fontSize: 11, color: 'var(--text-tertiary)' }}>{n.meta && n.meta.exam ? `Exam: ${n.meta.exam}` : ''}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div style={{ display: 'flex', gap: 8 }}>
+                                                            <button type="button" onClick={async () => {
+                                                                try {
+                                                                    const token = localStorage.getItem('token')
+                                                                    const res = await fetch(`/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: true }) })
+                                                                    const d = await res.json()
+                                                                    // store pending challenge so Feed can pick it up after redirect
+                                                                    if (res.ok) {
+                                                                        try { localStorage.setItem('pendingChallenge', JSON.stringify({ challengeId: n.meta.challengeId, questions: d.questions, exam: n.meta.exam })) } catch (e) { }
+                                                                        setNotifications(prev => prev.filter(x => x !== n))
+                                                                        // redirect to feed where challenge UI will start
+                                                                        window.location.href = '/feed'
+                                                                    } else alert(d.message || 'Failed')
+                                                                } catch (e) { alert('Failed') }
+                                                            }} style={{ padding: '8px 10px', borderRadius: 8, background: 'var(--accent-green)', color: '#fff', border: 'none' }}>Accept</button>
+                                                            <button type="button" onClick={async () => {
+                                                                try {
+                                                                    const token = localStorage.getItem('token')
+                                                                    await fetch(`/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: false }) })
+                                                                    setNotifications(prev => prev.filter(x => x !== n))
+                                                                } catch (e) { }
+                                                            }} style={{ padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Decline</button>
+                                                        </div>
+                                                    </div>
+                                                )
+
+                                                return null
+                                            })}
                                         </div>
                                     )}
 

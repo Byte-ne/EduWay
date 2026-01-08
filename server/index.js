@@ -27,6 +27,8 @@ app.use('/api/groups', require('./routes/groups'))
 app.use('/api/users', require('./routes/users'))
 // Challenges (peer challenge requests)
 app.use('/api/challenges', require('./routes/challenges'))
+// Study AI and question generator
+app.use('/api/study', require('./routes/study'))
 
 app.get('/api/hello', (req, res) => {
     res.json({ message: 'Hello from server' })

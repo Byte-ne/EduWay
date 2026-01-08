@@ -100,4 +100,40 @@ router.post('/:id/message', async (req, res) => {
     } catch (e) { console.error(e); res.status(500).json({ message: 'Server error' }) }
 })
 
+// Delete message from group
+router.delete('/:id/messages/:messageId', async (req, res) => {
+    try {
+        const userId = getUserIdFromHeader(req)
+        if (!userId) return res.status(401).json({ message: 'Unauthorized' })
+        const { id, messageId } = req.params
+        const g = await Group.findById(id)
+        if (!g) return res.status(404).json({ message: 'Group not found' })
+
+        // Check if user is a member of the group
+        if (!g.members.map(m => m.toString()).includes(userId)) {
+            return res.status(403).json({ message: 'Not allowed' })
+        }
+
+        // Find and remove the message
+        const messageIndex = g.messages.findIndex(msg => msg._id.toString() === messageId)
+        if (messageIndex === -1) {
+            return res.status(404).json({ message: 'Message not found' })
+        }
+
+        // Check if user is the author of the message (or allow group admins to delete any message)
+        const message = g.messages[messageIndex]
+        if (message.author.toString() !== userId) {
+            return res.status(403).json({ message: 'Can only delete your own messages' })
+        }
+
+        g.messages.splice(messageIndex, 1)
+        await g.save()
+
+        res.json({ message: 'Message deleted successfully' })
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: 'Server error' })
+    }
+})
+
 module.exports = router
