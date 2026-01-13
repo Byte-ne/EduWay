@@ -21,7 +21,7 @@ function Navigation() {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
-            const res = await fetch('http://localhost:5000/api/auth/notifications', { headers: { Authorization: `Bearer ${token}` } })
+            const res = await fetch('${__API_BASE_URL__}/api/auth/notifications', { headers: { Authorization: `Bearer ${token}` } })
             const data = await res.json()
             setNotifications(Array.isArray(data) ? data : [])
             setUnread((Array.isArray(data) ? data : []).filter(n => !n.read).length)
@@ -36,7 +36,7 @@ function Navigation() {
     async function markRead(id) {
         try {
             const token = localStorage.getItem('token')
-            await fetch('http://localhost:5000/api/auth/notifications/mark-read', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ id }) })
+            await fetch('${__API_BASE_URL__}/api/auth/notifications/mark-read', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ id }) })
             fetchNotifications()
         } catch (e) { }
     }
@@ -44,7 +44,7 @@ function Navigation() {
     async function markAll() {
         try {
             const token = localStorage.getItem('token')
-            await fetch('http://localhost:5000/api/auth/notifications/mark-all', { method: 'POST', headers: { Authorization: `Bearer ${token}` } })
+            await fetch('${__API_BASE_URL__}/api/auth/notifications/mark-all', { method: 'POST', headers: { Authorization: `Bearer ${token}` } })
             fetchNotifications()
         } catch (e) { }
     }

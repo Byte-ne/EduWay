@@ -33,7 +33,7 @@ export default function Profile() {
             return
         }
 
-        fetch('http://localhost:5000/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } })
+        fetch('${__API_BASE_URL__}/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } })
             .then(r => r.json())
             .then(data => {
                 if (data.message) setError(data.message)
@@ -49,7 +49,7 @@ export default function Profile() {
         setLoadingNotifications(true)
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch('http://localhost:5000/api/auth/notifications', { headers: { 'Authorization': `Bearer ${token}` } })
+            const res = await fetch('${__API_BASE_URL__}/api/auth/notifications', { headers: { 'Authorization': `Bearer ${token}` } })
             const data = await res.json()
             setNotifications(Array.isArray(data) ? data : [])
         } catch (e) { setNotifications([]) }
@@ -66,7 +66,7 @@ export default function Profile() {
         setSaving(true)
         const token = localStorage.getItem('token')
         try {
-            const res = await fetch('http://localhost:5000/api/auth/me', {
+            const res = await fetch('${__API_BASE_URL__}/api/auth/me', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(form)
@@ -93,7 +93,7 @@ export default function Profile() {
         setPwState(prev => ({ ...prev, message: '' }))
         const token = localStorage.getItem('token')
         try {
-            const res = await fetch('http://localhost:5000/api/auth/change-password', {
+            const res = await fetch('${__API_BASE_URL__}/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ currentPassword: pwState.currentPassword, newPassword: pwState.newPassword })
@@ -349,7 +349,7 @@ export default function Profile() {
                                     setSearching(true)
                                     try {
                                         const token = localStorage.getItem('token')
-                                        const res = await fetch(`http://localhost:5000/api/users/search?q=${encodeURIComponent(searchQuery)}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                                        const res = await fetch(`${__API_BASE_URL__}/api/users/search?q=${encodeURIComponent(searchQuery)}`, { headers: { 'Authorization': `Bearer ${token}` } })
                                         const data = await res.json()
                                         setSearchResults(Array.isArray(data) ? data : (data.results || []))
                                     } catch (e) { setSearchResults([]) }
@@ -370,7 +370,7 @@ export default function Profile() {
                                             <button type="button" onClick={async () => {
                                                 try {
                                                     const token = localStorage.getItem('token')
-                                                    await fetch(`http://localhost:5000/api/auth/add-buddy`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: r._id || r.id }) })
+                                                    await fetch(`${__API_BASE_URL__}/api/auth/add-buddy`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: r._id || r.id }) })
                                                     alert('Study buddy request sent')
                                                 } catch (e) { alert('Failed to send request') }
                                             }} style={{ padding: '8px 12px', borderRadius: 8, background: 'var(--accent-green)', color: '#fff', border: 'none' }}>Add</button>
@@ -516,7 +516,7 @@ export default function Profile() {
                                             <button type="button" onClick={async () => {
                                                 try {
                                                     const token = localStorage.getItem('token')
-                                                    await fetch('http://localhost:5000/api/groups', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ name: groupName, members: selectedMembers }) })
+                                                    await fetch('${__API_BASE_URL__}/api/groups', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ name: groupName, members: selectedMembers }) })
                                                     alert('Group created (if backend implemented)')
                                                 } catch (e) { alert('Failed to create group') }
                                             }} style={{ padding: '10px 14px', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Create Group</button>
