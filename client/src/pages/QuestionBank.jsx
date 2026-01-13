@@ -252,13 +252,13 @@ export default function QuestionBank() {
 
 
     return (
-        <div style={{
+        <div className="question-bank-page" style={{
             minHeight: '100vh',
             background: 'var(--bg-secondary)',
             padding: 'var(--space-8) var(--space-6)'
         }}>
             {/* Header */}
-            <div style={{
+            <div className="question-bank-header" style={{
                 textAlign: 'center',
                 marginBottom: 'var(--space-12)',
                 maxWidth: '800px',
@@ -279,7 +279,7 @@ export default function QuestionBank() {
                         <BookOpen size={40} style={{ color: 'var(--primary)' }} />
                     </div>
                     <div style={{ textAlign: 'left' }}>
-                        <h1 style={{
+                        <h1 className="question-bank-title" style={{
                             fontSize: '42px',
                             fontWeight: '800',
                             color: 'var(--text-primary)',
@@ -288,7 +288,7 @@ export default function QuestionBank() {
                         }}>
                             Question Bank
                         </h1>
-                        <p style={{
+                        <p className="question-bank-subtitle" style={{
                             color: 'var(--text-secondary)',
                             margin: 'var(--space-2) 0 0 0',
                             fontSize: '16px',
@@ -301,7 +301,7 @@ export default function QuestionBank() {
             </div>
 
             {/* Exam Tabs */}
-            <div style={{
+            <div className="exam-tabs" style={{
                 display: 'flex',
                 justifyContent: 'center',
                 gap: 'var(--space-3)',
@@ -338,7 +338,7 @@ export default function QuestionBank() {
             </div>
 
             {/* Exam Info */}
-            <div style={{
+            <div className="exam-info" style={{
                 background: 'var(--white)',
                 borderRadius: 'var(--radius-2xl)',
                 padding: 'var(--space-8)',
@@ -349,7 +349,7 @@ export default function QuestionBank() {
                 maxWidth: '900px',
                 margin: '0 auto var(--space-8)'
             }}>
-                <div style={{
+                <div className="exam-info-icon" style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -362,7 +362,7 @@ export default function QuestionBank() {
                 }}>
                     <span style={{ fontSize: '48px' }}>{examData[activeExam].icon}</span>
                 </div>
-                <h2 style={{
+                <h2 className="exam-info-title" style={{
                     fontSize: '32px',
                     fontWeight: '800',
                     color: 'var(--text-primary)',
@@ -371,7 +371,7 @@ export default function QuestionBank() {
                 }}>
                     {examData[activeExam].title}
                 </h2>
-                <p style={{
+                <p className="exam-info-subtitle" style={{
                     color: 'var(--text-secondary)',
                     fontSize: '17px',
                     maxWidth: '700px',
@@ -383,7 +383,7 @@ export default function QuestionBank() {
             </div>
 
             {/* Papers Grid */}
-            <div style={{
+            <div className="papers-grid" style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
                 gap: 'var(--space-6)',
@@ -393,6 +393,7 @@ export default function QuestionBank() {
                 {examData[activeExam].papers.map((paper, index) => (
                     <div
                         key={index}
+                        className="paper-card"
                         style={{
                             background: 'var(--white)',
                             borderRadius: 'var(--radius-xl)',
@@ -411,7 +412,7 @@ export default function QuestionBank() {
                             paddingBottom: 'var(--space-4)',
                             borderBottom: '2px solid var(--border-light)'
                         }}>
-                            <div style={{
+                            <div className="paper-year-icon" style={{
                                 width: '60px',
                                 height: '60px',
                                 background: 'var(--primary)',
@@ -426,7 +427,7 @@ export default function QuestionBank() {
                                 {paper.year.slice(-2)}
                             </div>
                             <div>
-                                <h3 style={{
+                                <h3 className="paper-year-title" style={{
                                     fontSize: '24px',
                                     fontWeight: '800',
                                     color: 'var(--text-primary)',
@@ -458,6 +459,7 @@ export default function QuestionBank() {
                                     href={link.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    className="paper-link"
                                     style={{
                                         display: 'flex',
                                         alignItems: 'center',
@@ -479,16 +481,16 @@ export default function QuestionBank() {
                                         alignItems: 'center',
                                         gap: 'var(--space-3)'
                                     }}>
-                                        <FileText size={22} style={{ color: 'var(--primary)' }} />
+                                        <FileText className="paper-link-icon" size={22} style={{ color: 'var(--primary)' }} />
                                         <div>
-                                            <div style={{
+                                            <div className="paper-link-title" style={{
                                                 fontSize: '15px',
                                                 fontWeight: '700',
                                                 color: 'var(--text-primary)'
                                             }}>
                                                 {link.name}
                                             </div>
-                                            <div style={{
+                                            <div className="paper-link-subtitle" style={{
                                                 fontSize: '13px',
                                                 color: 'var(--text-secondary)',
                                                 fontWeight: '500'
@@ -506,7 +508,7 @@ export default function QuestionBank() {
             </div>
 
             {/* Info Section */}
-            <div style={{
+            <div className="info-section" style={{
                 background: 'var(--white)',
                 borderRadius: 'var(--radius-xl)',
                 padding: '32px',
@@ -521,7 +523,7 @@ export default function QuestionBank() {
                     marginBottom: '24px'
                 }}>
                     <Award size={32} style={{ color: 'var(--primary-blue)' }} />
-                    <h3 style={{
+                    <h3 className="info-title" style={{
                         fontSize: '24px',
                         fontWeight: '600',
                         color: 'var(--text-primary)',
@@ -530,7 +532,7 @@ export default function QuestionBank() {
                         Practice Makes Perfect
                     </h3>
                 </div>
-                <p style={{
+                <p className="info-text" style={{
                     color: 'var(--text-secondary)',
                     fontSize: '16px',
                     maxWidth: '600px',
@@ -539,13 +541,13 @@ export default function QuestionBank() {
                     Regular practice with previous year question papers is the key to exam success.
                     Download, solve, and analyze your performance to improve continuously.
                 </p>
-                <div style={{
+                <div className="info-badges" style={{
                     display: 'flex',
                     gap: '16px',
                     justifyContent: 'center',
                     flexWrap: 'wrap'
                 }}>
-                    <div style={{
+                    <div className="info-badge" style={{
                         padding: '12px 20px',
                         background: 'linear-gradient(135deg, #4285F4, #34A853)',
                         color: 'white',
@@ -555,7 +557,7 @@ export default function QuestionBank() {
                     }}>
                         📚 10 Years of Papers
                     </div>
-                    <div style={{
+                    <div className="info-badge" style={{
                         padding: '12px 20px',
                         background: 'linear-gradient(135deg, #EA4335, #FBBC05)',
                         color: 'white',
@@ -565,7 +567,7 @@ export default function QuestionBank() {
                     }}>
                         🎯 Exam-Ready Practice
                     </div>
-                    <div style={{
+                    <div className="info-badge" style={{
                         padding: '12px 20px',
                         background: 'linear-gradient(135deg, #34A853, #4285F4)',
                         color: 'white',

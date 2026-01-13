@@ -59,14 +59,14 @@ export default function Study() {
     }
 
     return (
-        <div style={{
+        <div className="study-page" style={{
             maxWidth: '1280px',
             margin: '0 auto',
             padding: 'var(--space-8) var(--space-6)',
             minHeight: 'calc(100vh - 72px)'
         }}>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
-                <h1 style={{
+            <div className="study-header" style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
+                <h1 className="study-title" style={{
                     fontSize: '42px',
                     fontWeight: '800',
                     color: 'var(--text-primary)',
@@ -75,7 +75,7 @@ export default function Study() {
                 }}>
                     AI Study Assistant
                 </h1>
-                <p style={{
+                <p className="study-subtitle" style={{
                     fontSize: '18px',
                     color: 'var(--text-secondary)',
                     maxWidth: '700px',
@@ -86,7 +86,7 @@ export default function Study() {
                 </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)' }}>
+            <div className="study-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)' }}>
                 {/* AI Helper */}
                 <div style={{
                     background: 'var(--white)',

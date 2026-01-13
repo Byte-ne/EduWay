@@ -202,7 +202,7 @@ export default function ExamDetails() {
     }
 
     return (
-        <div style={{
+        <div className="exam-layout" style={{
             maxWidth: '1400px',
             margin: '0 auto',
             padding: 'var(--space-8) var(--space-6)',
@@ -212,7 +212,7 @@ export default function ExamDetails() {
             minHeight: 'calc(100vh - 72px)'
         }}>
             {/* Sidebar */}
-            <aside style={{
+            <aside className="exam-sidebar" style={{
                 background: 'var(--white)',
                 borderRadius: 'var(--radius-2xl)',
                 padding: 'var(--space-6)',
@@ -231,6 +231,7 @@ export default function ExamDetails() {
                             placeholder="Search exams..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
+                            className="exam-search"
                             style={{
                                 width: '100%',
                                 padding: 'var(--space-3) var(--space-3) var(--space-3) 48px',
@@ -250,6 +251,7 @@ export default function ExamDetails() {
                         <button
                             key={exam.id}
                             onClick={() => setSelectedExam(exam)}
+                            className="exam-tab"
                             style={{
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -285,7 +287,7 @@ export default function ExamDetails() {
             </aside>
 
             {/* Exam Details */}
-            <main>
+            <main className="exam-main">
                 {selectedExam ? (
                     <article style={{
                         background: 'var(--white)',
@@ -336,14 +338,14 @@ export default function ExamDetails() {
                         </header>
 
                         {/* Content Grid */}
-                        <div style={{
+                        <div className="exam-content" style={{
                             display: 'grid',
                             gridTemplateColumns: '1fr 1fr',
                             gap: '32px',
                             marginBottom: '32px'
                         }}>
                             {/* Syllabus */}
-                            <div>
+                            <div className="exam-section">
                                 <div style={{
                                     display: 'flex',
                                     alignItems: 'center',

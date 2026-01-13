@@ -138,9 +138,9 @@ export default function Profile() {
     if (!user) return null
 
     return (
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)', minHeight: 'calc(100vh - 72px)' }}>
+        <div className="profile-page" style={{ maxWidth: '1200px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)', minHeight: 'calc(100vh - 72px)' }}>
             {/* Profile Header */}
-            <div style={{
+            <div className="profile-header" style={{
                 background: 'var(--white)',
                 borderRadius: 'var(--radius-2xl)',
                 padding: 'var(--space-8)',
@@ -148,13 +148,14 @@ export default function Profile() {
                 boxShadow: 'var(--shadow-md)',
                 marginBottom: 'var(--space-6)'
             }}>
-                <div style={{ display: 'flex', gap: 'var(--space-8)', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                <div className="profile-info" style={{ display: 'flex', gap: 'var(--space-8)', alignItems: 'flex-start', flexWrap: 'wrap' }}>
                     {/* Avatar */}
                     <div style={{ textAlign: 'center' }}>
                         {form.profilePic ? (
                             <img
                                 src={form.profilePic}
                                 alt="Profile"
+                                className="profile-avatar"
                                 style={{
                                     width: '140px',
                                     height: '140px',
@@ -165,7 +166,7 @@ export default function Profile() {
                                 }}
                             />
                         ) : (
-                            <div style={{
+                            <div className="profile-avatar" style={{
                                 width: '140px',
                                 height: '140px',
                                 borderRadius: '50%',
@@ -208,7 +209,7 @@ export default function Profile() {
                     {/* Info */}
                     <div style={{ flex: 1, minWidth: '400px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-4)' }}>
-                            <h1 style={{
+                            <h1 className="profile-name" style={{
                                 fontSize: '36px',
                                 fontWeight: '800',
                                 color: 'var(--text-primary)',
@@ -283,7 +284,7 @@ export default function Profile() {
                         )}
 
                         {/* Stats */}
-                        <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
+                        <div className="profile-stats" style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
                             <div
                                 role="button"
                                 tabIndex={0}
@@ -341,10 +342,10 @@ export default function Profile() {
                             </div>
                         </div>
                         {/* Always-visible quick-add/search for buddies */}
-                        <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--border-light)' }}>
+                        <div className="buddy-search" style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--border-light)' }}>
                             <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 8 }}>Find or Add Study Buddies</div>
                             <div style={{ display: 'flex', gap: 8 }}>
-                                <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search by name or email" style={{ flex: 1, padding: 10, borderRadius: 8, border: '1px solid var(--border-light)' }} />
+                                <input className="buddy-search-input" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search by name or email" style={{ flex: 1, padding: 10, borderRadius: 8, border: '1px solid var(--border-light)' }} />
                                 <button type="button" onClick={async () => {
                                     setSearching(true)
                                     try {
@@ -359,7 +360,7 @@ export default function Profile() {
                             {searchResults && searchResults.length > 0 && (
                                 <div style={{ marginTop: 8, display: 'grid', gap: 8 }}>
                                     {searchResults.map((r, idx) => (
-                                        <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 8, background: 'var(--white)', borderRadius: 8 }}>
+                                        <div key={idx} className="buddy-result" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 8, background: 'var(--white)', borderRadius: 8 }}>
                                             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                                                 {r.profilePic ? <img src={r.profilePic} alt={r.name || r.email} style={{ width: 36, height: 36, borderRadius: 999, objectFit: 'cover' }} /> : <div style={{ width: 36, height: 36, borderRadius: 999, background: 'var(--primary-blue)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{(r.name || r.email || 'U').charAt(0).toUpperCase()}</div>}
                                                 <div>
@@ -534,7 +535,7 @@ export default function Profile() {
                     <form onSubmit={saveProfile} style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid var(--border-light)' }}>
                         {error && <div className="error" style={{ marginBottom: '16px' }}>{error}</div>}
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '16px' }}>
+                        <div className="profile-form-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '16px' }}>
                             <div>
                                 <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-primary)', fontSize: '14px', fontWeight: '500' }}>
                                     Full Name
@@ -600,10 +601,11 @@ export default function Profile() {
                             />
                         </div>
 
-                        <div style={{ display: 'flex', gap: '12px' }}>
+                        <div className="profile-buttons" style={{ display: 'flex', gap: '12px' }}>
                             <button
                                 type="submit"
                                 disabled={saving}
+                                className="profile-button"
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center',
@@ -656,9 +658,9 @@ export default function Profile() {
             </div>
 
             {/* Two Column Layout */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '24px' }}>
+            <div className="profile-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '24px' }}>
                 {/* Posts Section */}
-                <div style={{
+                <div className="posts-section" style={{
                     background: 'var(--white)',
                     padding: '24px',
                     borderRadius: 'var(--radius-xl)',
@@ -721,7 +723,7 @@ export default function Profile() {
                 </div>
 
                 {/* Account Settings Section */}
-                <div style={{
+                <div className="settings-section" style={{
                     background: 'var(--white)',
                     padding: '24px',
                     borderRadius: 'var(--radius-xl)',

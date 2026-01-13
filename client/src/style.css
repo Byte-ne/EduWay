@@ -1625,6 +1625,461 @@ body {
     }
 }
 
+/* Study Page Mobile */
+@media (max-width: 1024px) {
+    .study-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-6) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .study-page {
+        padding: var(--space-4) var(--space-2) !important;
+    }
+
+    .study-header {
+        margin-bottom: var(--space-6) !important;
+    }
+
+    .study-title {
+        font-size: 28px !important;
+    }
+
+    .study-subtitle {
+        font-size: 14px !important;
+    }
+
+    .study-grid {
+        gap: var(--space-4) !important;
+    }
+
+    .study-card {
+        padding: var(--space-4) !important;
+    }
+
+    .study-card-title {
+        font-size: 20px !important;
+    }
+
+    .study-input {
+        padding: var(--space-3) !important;
+        font-size: 14px !important;
+    }
+
+    .study-textarea {
+        padding: var(--space-3) !important;
+        min-height: 100px !important;
+    }
+
+    .study-button {
+        padding: var(--space-3) var(--space-4) !important;
+        font-size: 14px !important;
+    }
+
+    .study-select {
+        padding: var(--space-3) !important;
+        font-size: 14px !important;
+    }
+
+    .question-card {
+        padding: var(--space-4) !important;
+        margin-bottom: var(--space-3) !important;
+    }
+
+    .question-title {
+        font-size: 14px !important;
+    }
+
+    .question-option {
+        font-size: 13px !important;
+    }
+}
+
+/* Exam Details Page Mobile */
+@media (max-width: 1024px) {
+    .exam-layout {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-6) !important;
+    }
+
+    .exam-sidebar {
+        order: 2 !important;
+    }
+
+    .exam-main {
+        order: 1 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .exam-page {
+        padding: var(--space-4) var(--space-2) !important;
+    }
+
+    .exam-header {
+        margin-bottom: var(--space-6) !important;
+    }
+
+    .exam-title {
+        font-size: 28px !important;
+    }
+
+    .exam-subtitle {
+        font-size: 14px !important;
+    }
+
+    .exam-sidebar {
+        margin-bottom: var(--space-4);
+    }
+
+    .exam-search {
+        padding: var(--space-3) var(--space-3) var(--space-3) 44px !important;
+        font-size: 14px !important;
+    }
+
+    .exam-tab {
+        padding: var(--space-3) var(--space-4) !important;
+        font-size: 13px !important;
+    }
+
+    .exam-main {
+        padding: var(--space-4) !important;
+    }
+
+    .exam-info-title {
+        font-size: 32px !important;
+    }
+
+    .exam-info-subtitle {
+        font-size: 15px !important;
+    }
+
+    .exam-content {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-4) !important;
+    }
+
+    .exam-section {
+        padding: var(--space-4) !important;
+    }
+
+    .exam-list-item {
+        padding: var(--space-3) !important;
+        font-size: 13px !important;
+    }
+
+    .exam-date-card {
+        padding: var(--space-4) !important;
+    }
+
+    .exam-tips {
+        padding: var(--space-4) !important;
+    }
+
+    .exam-tips-title {
+        font-size: 18px !important;
+    }
+}
+
+/* Profile Page Mobile */
+@media (max-width: 1024px) {
+    .profile-layout {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-4) !important;
+    }
+
+    .profile-sidebar {
+        order: 2 !important;
+    }
+
+    .profile-main {
+        order: 1 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-page {
+        padding: var(--space-4) var(--space-2) !important;
+    }
+
+    .profile-header {
+        padding: var(--space-4) !important;
+        margin-bottom: var(--space-4) !important;
+    }
+
+    .profile-avatar {
+        width: 100px !important;
+        height: 100px !important;
+        margin-bottom: var(--space-3);
+    }
+
+    .profile-name {
+        font-size: 28px !important;
+    }
+
+    .profile-info {
+        flex-direction: column !important;
+        gap: var(--space-2) !important;
+        text-align: center !important;
+    }
+
+    .profile-stats {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: var(--space-2) !important;
+        margin-top: var(--space-4) !important;
+    }
+
+    .stat-card {
+        padding: var(--space-3) !important;
+        text-align: center !important;
+    }
+
+    .stat-number {
+        font-size: 24px !important;
+    }
+
+    .stat-label {
+        font-size: 12px !important;
+    }
+
+    .buddy-search {
+        padding-top: var(--space-3) !important;
+        border-top: 1px solid var(--border-light) !important;
+    }
+
+    .buddy-search-input {
+        padding: var(--space-2) !important;
+        font-size: 14px !important;
+    }
+
+    .buddy-result {
+        padding: var(--space-3) !important;
+        margin: var(--space-1) 0 !important;
+    }
+
+    .profile-edit-form {
+        margin-top: var(--space-4) !important;
+        padding-top: var(--space-4) !important;
+    }
+
+    .profile-form-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-3) !important;
+    }
+
+    .profile-form-input {
+        padding: var(--space-3) !important;
+        font-size: 14px !important;
+    }
+
+    .profile-form-textarea {
+        padding: var(--space-3) !important;
+        font-size: 14px !important;
+    }
+
+    .profile-buttons {
+        gap: var(--space-2) !important;
+    }
+
+    .profile-button {
+        padding: var(--space-3) var(--space-4) !important;
+        font-size: 14px !important;
+    }
+
+    .profile-layout {
+        gap: var(--space-4) !important;
+    }
+
+    .posts-section,
+    .settings-section {
+        padding: var(--space-4) !important;
+    }
+
+    .posts-title {
+        font-size: 18px !important;
+        margin-bottom: var(--space-3) !important;
+    }
+
+    .post-item {
+        padding: var(--space-3) !important;
+    }
+
+    .settings-title {
+        font-size: 18px !important;
+        margin-bottom: var(--space-3) !important;
+    }
+
+    .password-form input {
+        padding: var(--space-3) !important;
+        font-size: 14px !important;
+    }
+
+    .password-button {
+        padding: var(--space-3) !important;
+        font-size: 14px !important;
+    }
+}
+
+/* Question Bank Page Mobile */
+@media (max-width: 1024px) {
+    .question-bank-page {
+        padding: var(--space-6) var(--space-4) !important;
+    }
+
+    .question-bank-header {
+        margin-bottom: var(--space-8) !important;
+    }
+
+    .question-bank-title {
+        font-size: 36px !important;
+    }
+
+    .question-bank-subtitle {
+        font-size: 15px !important;
+    }
+
+    .exam-tabs {
+        gap: var(--space-2) !important;
+        padding: 0 var(--space-2) !important;
+    }
+
+    .exam-tab {
+        padding: var(--space-3) var(--space-4) !important;
+        font-size: 13px !important;
+    }
+
+    .exam-info {
+        padding: var(--space-6) !important;
+        margin-bottom: var(--space-6) !important;
+    }
+
+    .exam-info-icon {
+        width: 80px !important;
+        height: 80px !important;
+        font-size: 36px !important;
+    }
+
+    .exam-info-title {
+        font-size: 28px !important;
+    }
+
+    .exam-info-subtitle {
+        font-size: 16px !important;
+    }
+
+    .papers-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-4) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .question-bank-page {
+        padding: var(--space-4) var(--space-2) !important;
+    }
+
+    .question-bank-header {
+        margin-bottom: var(--space-6) !important;
+    }
+
+    .question-bank-title {
+        font-size: 28px !important;
+    }
+
+    .question-bank-subtitle {
+        font-size: 14px !important;
+    }
+
+    .exam-tabs {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: var(--space-2) !important;
+    }
+
+    .exam-tab {
+        padding: var(--space-2) var(--space-3) !important;
+        font-size: 12px !important;
+        gap: var(--space-1) !important;
+    }
+
+    .exam-tab-icon {
+        font-size: 16px !important;
+    }
+
+    .exam-info {
+        padding: var(--space-4) !important;
+    }
+
+    .exam-info-icon {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 24px !important;
+    }
+
+    .exam-info-title {
+        font-size: 24px !important;
+    }
+
+    .exam-info-subtitle {
+        font-size: 14px !important;
+    }
+
+    .paper-card {
+        padding: var(--space-4) !important;
+    }
+
+    .paper-year-icon {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 18px !important;
+    }
+
+    .paper-year-title {
+        font-size: 20px !important;
+    }
+
+    .paper-link {
+        padding: var(--space-3) !important;
+    }
+
+    .paper-link-icon {
+        font-size: 18px !important;
+    }
+
+    .paper-link-title {
+        font-size: 14px !important;
+    }
+
+    .paper-link-subtitle {
+        font-size: 12px !important;
+    }
+
+    .info-section {
+        padding: var(--space-4) !important;
+        margin-top: var(--space-6) !important;
+    }
+
+    .info-title {
+        font-size: 20px !important;
+    }
+
+    .info-text {
+        font-size: 14px !important;
+    }
+
+    .info-badges {
+        flex-wrap: wrap !important;
+        gap: var(--space-2) !important;
+    }
+
+    .info-badge {
+        padding: var(--space-2) var(--space-3) !important;
+        font-size: 12px !important;
+    }
+}
+
 /* Touch-friendly interactions */
 @media (hover: none) and (pointer: coarse) {
     .nav-link:hover,
