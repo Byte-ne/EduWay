@@ -9,6 +9,8 @@ function replaceInFile(filePath) {
         // Replace environment variables with hardcoded server URL for testing
         content = content.replace(/\$\{import\.meta\.env\.VITE_API_URL\}/g, 'https://final-hackathon-me4n.onrender.com');
         content = content.replace(/\$\{import\.meta\.env\.VITE_API_URL \|\| "http:\/\/localhost:5000"\}/g, 'https://final-hackathon-me4n.onrender.com');
+        // Also replace any remaining wrong URLs
+        content = content.replace(/https:\/\/eduway-server\.onrender\.com/g, 'https://final-hackathon-me4n.onrender.com');
         // Also replace the old variable name
         content = content.replace(/__API_BASE_URL__/g, 'https://final-hackathon-me4n.onrender.com');
         content = content.replace(/__API_URL__/g, 'https://final-hackathon-me4n.onrender.com');

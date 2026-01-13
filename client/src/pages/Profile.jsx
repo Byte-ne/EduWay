@@ -33,7 +33,7 @@ export default function Profile() {
             return
         }
 
-        fetch('https://eduway-server.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } })
+        fetch('https://final-hackathon-me4n.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } })
             .then(r => r.json())
             .then(data => {
                 if (data.message) setError(data.message)
@@ -49,7 +49,7 @@ export default function Profile() {
         setLoadingNotifications(true)
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch('https://eduway-server.onrender.com/api/auth/notifications', { headers: { 'Authorization': `Bearer ${token}` } })
+            const res = await fetch('https://final-hackathon-me4n.onrender.com/api/auth/notifications', { headers: { 'Authorization': `Bearer ${token}` } })
             const data = await res.json()
             setNotifications(Array.isArray(data) ? data : [])
         } catch (e) { setNotifications([]) }
@@ -66,7 +66,7 @@ export default function Profile() {
         setSaving(true)
         const token = localStorage.getItem('token')
         try {
-            const res = await fetch('https://eduway-server.onrender.com/api/auth/me', {
+            const res = await fetch('https://final-hackathon-me4n.onrender.com/api/auth/me', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(form)
@@ -93,7 +93,7 @@ export default function Profile() {
         setPwState(prev => ({ ...prev, message: '' }))
         const token = localStorage.getItem('token')
         try {
-            const res = await fetch('https://eduway-server.onrender.com/api/auth/change-password', {
+            const res = await fetch('https://final-hackathon-me4n.onrender.com/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ currentPassword: pwState.currentPassword, newPassword: pwState.newPassword })
@@ -349,7 +349,7 @@ export default function Profile() {
                                     setSearching(true)
                                     try {
                                         const token = localStorage.getItem('token')
-                                        const res = await fetch(`https://eduway-server.onrender.com/api/users/search?q=${encodeURIComponent(searchQuery)}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                                        const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/users/search?q=${encodeURIComponent(searchQuery)}`, { headers: { 'Authorization': `Bearer ${token}` } })
                                         const data = await res.json()
                                         setSearchResults(Array.isArray(data) ? data : (data.results || []))
                                     } catch (e) { setSearchResults([]) }
@@ -370,7 +370,7 @@ export default function Profile() {
                                             <button type="button" onClick={async () => {
                                                 try {
                                                     const token = localStorage.getItem('token')
-                                                    await fetch(`https://eduway-server.onrender.com/api/auth/add-buddy`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: r._id || r.id }) })
+                                                    await fetch(`https://final-hackathon-me4n.onrender.com/api/auth/add-buddy`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: r._id || r.id }) })
                                                     alert('Study buddy request sent')
                                                 } catch (e) { alert('Failed to send request') }
                                             }} style={{ padding: '8px 12px', borderRadius: 8, background: 'var(--accent-green)', color: '#fff', border: 'none' }}>Add</button>
@@ -412,13 +412,13 @@ export default function Profile() {
                                                         <div style={{ display: 'flex', gap: 8 }}>
                                                             <button type="button" onClick={async () => {
                                                                 const token = localStorage.getItem('token')
-                                                                await fetch('https://eduway-server.onrender.com/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'accept' }) })
+                                                                await fetch('https://final-hackathon-me4n.onrender.com/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'accept' }) })
                                                                 setNotifications(prev => prev.filter(x => x !== n))
                                                                 load()
                                                             }} style={{ padding: '8px 10px', borderRadius: 8, background: 'var(--accent-green)', color: '#fff', border: 'none' }}>Accept</button>
                                                             <button type="button" onClick={async () => {
                                                                 const token = localStorage.getItem('token')
-                                                                await fetch('https://eduway-server.onrender.com/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'reject' }) })
+                                                                await fetch('https://final-hackathon-me4n.onrender.com/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'reject' }) })
                                                                 setNotifications(prev => prev.filter(x => x !== n))
                                                             }} style={{ padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Reject</button>
                                                         </div>
@@ -439,7 +439,7 @@ export default function Profile() {
                                                             <button type="button" onClick={async () => {
                                                                 try {
                                                                     const token = localStorage.getItem('token')
-                                                                    const res = await fetch(`https://eduway-server.onrender.com/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: true }) })
+                                                                    const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: true }) })
                                                                     const d = await res.json()
                                                                     // store pending challenge so Feed can pick it up after redirect
                                                                     if (res.ok) {
@@ -453,7 +453,7 @@ export default function Profile() {
                                                             <button type="button" onClick={async () => {
                                                                 try {
                                                                     const token = localStorage.getItem('token')
-                                                                    await fetch(`https://eduway-server.onrender.com/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: false }) })
+                                                                    await fetch(`https://final-hackathon-me4n.onrender.com/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: false }) })
                                                                     setNotifications(prev => prev.filter(x => x !== n))
                                                                 } catch (e) { }
                                                             }} style={{ padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Decline</button>
@@ -516,7 +516,7 @@ export default function Profile() {
                                             <button type="button" onClick={async () => {
                                                 try {
                                                     const token = localStorage.getItem('token')
-                                                    await fetch('https://eduway-server.onrender.com/api/groups', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ name: groupName, members: selectedMembers }) })
+                                                    await fetch('https://final-hackathon-me4n.onrender.com/api/groups', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ name: groupName, members: selectedMembers }) })
                                                     alert('Group created (if backend implemented)')
                                                 } catch (e) { alert('Failed to create group') }
                                             }} style={{ padding: '10px 14px', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Create Group</button>

@@ -447,7 +447,7 @@ export default function Feed() {
 
     function load() {
         setLoading(true)
-        fetch('https://eduway-server.onrender.com/api/posts')
+        fetch('https://final-hackathon-me4n.onrender.com/api/posts')
             .then(r => r.json())
             .then(data => {
                 setPosts(data);
@@ -461,7 +461,7 @@ export default function Feed() {
         const token = localStorage.getItem('token')
         if (!token) return
         try {
-            const res = await fetch('https://eduway-server.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } })
+            const res = await fetch('https://final-hackathon-me4n.onrender.com/api/auth/me', { headers: { 'Authorization': `Bearer ${token}` } })
             const data = await res.json()
             if (!res.ok) return
             setUser(data)
@@ -480,7 +480,7 @@ export default function Feed() {
     async function searchMember(q) {
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch(`https://eduway-server.onrender.com/api/users/search?q=${encodeURIComponent(q)}`, { headers: { Authorization: `Bearer ${token}` } })
+            const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/users/search?q=${encodeURIComponent(q)}`, { headers: { Authorization: `Bearer ${token}` } })
             const data = await res.json()
             setMemberSearchResults(Array.isArray(data) ? data : [])
         } catch (e) { setMemberSearchResults([]) }
@@ -489,7 +489,7 @@ export default function Feed() {
     async function addMemberToGroup(groupId, memberId) {
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch(`https://eduway-server.onrender.com/api/groups/${groupId}/add-member`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ memberId }) })
+            const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${groupId}/add-member`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ memberId }) })
             const data = await res.json()
             if (res.ok) {
                 // refresh groups and selected group
@@ -503,7 +503,7 @@ export default function Feed() {
     async function renameGroup(groupId, name) {
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch(`https://eduway-server.onrender.com/api/groups/${groupId}/rename`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ name }) })
+            const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${groupId}/rename`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ name }) })
             const data = await res.json()
             if (res.ok) {
                 loadGroups()
@@ -514,7 +514,7 @@ export default function Feed() {
     }
 
     useEffect(() => {
-        const socket = ioClient('https://eduway-server.onrender.com')
+        const socket = ioClient('https://final-hackathon-me4n.onrender.com')
         socket.on('connect', () => console.log('connected to socket', socket.id))
         socket.on('post:created', (p) => {
             setPosts(prev => [p, ...prev])
@@ -543,7 +543,7 @@ export default function Feed() {
                     // fetch updated group
                     (async () => {
                         try {
-                            const res = await fetch(`https://eduway-server.onrender.com/api/groups/${groupId}`)
+                            const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${groupId}`)
                             const data = await res.json()
                             setSelectedGroup(data)
                             setGroupMessages(data.messages || [])
@@ -574,7 +574,7 @@ export default function Feed() {
         setCreating(true)
         const token = localStorage.getItem('token')
         try {
-            const res = await fetch('https://eduway-server.onrender.com/api/posts', {
+            const res = await fetch('https://final-hackathon-me4n.onrender.com/api/posts', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ title: postTitle, content: postContent, media: postMedia ? [postMedia] : [], isVideo: postIsVideo })
@@ -602,7 +602,7 @@ export default function Feed() {
     })
 
     async function like(id) {
-        await fetch(`https://eduway-server.onrender.com/api/posts/${id}/like`, {
+        await fetch(`https://final-hackathon-me4n.onrender.com/api/posts/${id}/like`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
@@ -611,7 +611,7 @@ export default function Feed() {
 
     async function comment(id, text) {
         if (!text) return
-        await fetch(`https://eduway-server.onrender.com/api/posts/${id}/comment`, {
+        await fetch(`https://final-hackathon-me4n.onrender.com/api/posts/${id}/comment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -623,7 +623,7 @@ export default function Feed() {
     }
 
     async function studyRequest(id) {
-        await fetch(`https://eduway-server.onrender.com/api/posts/${id}/study-request`, {
+        await fetch(`https://final-hackathon-me4n.onrender.com/api/posts/${id}/study-request`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
@@ -633,7 +633,7 @@ export default function Feed() {
     // Groups helpers
     async function loadGroups() {
         try {
-            const res = await fetch('https://eduway-server.onrender.com/api/groups')
+            const res = await fetch('https://final-hackathon-me4n.onrender.com/api/groups')
             const data = await res.json()
             if (Array.isArray(data)) setGroups(data)
         } catch (e) { }
@@ -641,7 +641,7 @@ export default function Feed() {
 
     async function selectGroup(id) {
         try {
-            const res = await fetch(`https://eduway-server.onrender.com/api/groups/${id}`)
+            const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${id}`)
             const data = await res.json()
             setSelectedGroup(data)
             setGroupMessages(data.messages || [])
@@ -651,7 +651,7 @@ export default function Feed() {
     async function createGroup(name) {
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch('https://eduway-server.onrender.com/api/groups', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ name, members: [] }) })
+            const res = await fetch('https://final-hackathon-me4n.onrender.com/api/groups', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ name, members: [] }) })
             const data = await res.json()
             setGroups(g => [data, ...g])
             return data
@@ -661,7 +661,7 @@ export default function Feed() {
     async function sendGroupMessage(groupId, text) {
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch(`https://eduway-server.onrender.com/api/groups/${groupId}/message`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ text }) })
+            const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${groupId}/message`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ text }) })
             const data = await res.json()
             // message will be appended via socket event
             return data
@@ -781,7 +781,7 @@ export default function Feed() {
                                                 if (!window.confirm('Delete this group?')) return
                                                 try {
                                                     const token = localStorage.getItem('token')
-                                                    const res = await fetch(`https://eduway-server.onrender.com/api/groups/${g._id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } })
+                                                    const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${g._id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } })
                                                     if (res.ok) { loadGroups(); if (selectedGroup && selectedGroup._id === g._id) setSelectedGroup(null) }
                                                     else { const d = await res.json(); alert(d.message || 'Failed') }
                                                 } catch (e) { alert('Failed') }
@@ -820,7 +820,7 @@ export default function Feed() {
                                                             if (!window.confirm('Delete this message?')) return
                                                             try {
                                                                 const token = localStorage.getItem('token')
-                                                                const res = await fetch(`https://eduway-server.onrender.com/api/groups/${selectedGroup._id}/messages/${m._id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } })
+                                                                const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${selectedGroup._id}/messages/${m._id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } })
                                                                 if (res.ok) {
                                                                     setGroupMessages(prev => prev.filter(x => x._id !== m._id))
                                                                 } else {
