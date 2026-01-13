@@ -671,12 +671,14 @@ export default function Feed() {
     return (
         <div className="feed-container" style={{
             display: 'flex',
+            flexDirection: 'column',
             gap: 'var(--space-6)',
             padding: 'var(--space-6)',
             maxWidth: '1400px',
             margin: '0 auto',
             minHeight: 'calc(100vh - 72px)'
         }}>
+            {/* Sidebar on top for mobile/tablet, sidebar on left for desktop */}
             <div className="sidebar">
                 <Sidebar active={activeTab} setActive={setActiveTab} />
             </div>
@@ -1226,7 +1228,73 @@ export default function Feed() {
                 )}
             </main>
 
-            <RightSidebar />
+            {/* Quick Tips and Your Journey at the bottom */}
+            <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', marginTop: 'var(--space-6)' }}>
+                <div style={{
+                    flex: 1,
+                    minWidth: '280px',
+                    background: 'var(--white)',
+                    padding: 'var(--space-5)',
+                    borderRadius: 'var(--radius-xl)',
+                    border: '2px solid var(--border-light)',
+                    boxShadow: 'var(--shadow-sm)'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
+                        <Lightbulb size={20} style={{ color: 'var(--accent)' }} />
+                        <h4 style={{
+                            margin: 0,
+                            fontSize: '18px',
+                            fontWeight: '700',
+                            color: 'var(--text-primary)'
+                        }}>
+                            Quick Tips
+                        </h4>
+                    </div>
+                    <ul style={{
+                        paddingLeft: '20px',
+                        margin: 0,
+                        color: 'var(--text-secondary)',
+                        fontSize: '14px',
+                        lineHeight: '1.8'
+                    }}>
+                        <li>Share photos of your study notes</li>
+                        <li>Upload short video explanations</li>
+                        <li>Ask questions and help others</li>
+                        <li>Connect with study buddies</li>
+                        <li>Be respectful and encouraging</li>
+                    </ul>
+                </div>
+
+                <div style={{
+                    flex: 1,
+                    minWidth: '280px',
+                    background: 'var(--white)',
+                    padding: 'var(--space-5)',
+                    borderRadius: 'var(--radius-xl)',
+                    border: '2px solid var(--border-light)',
+                    boxShadow: 'var(--shadow-sm)'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
+                        <MapPin size={20} style={{ color: 'var(--success)' }} />
+                        <h4 style={{
+                            margin: 0,
+                            fontSize: '18px',
+                            fontWeight: '700',
+                            color: 'var(--text-primary)'
+                        }}>
+                            Your Journey
+                        </h4>
+                    </div>
+                    <p style={{
+                        margin: 0,
+                        color: 'var(--text-secondary)',
+                        fontSize: '14px',
+                        lineHeight: '1.6'
+                    }}>
+                        Track your progress and share milestones with the community. Every step counts!
+                    </p>
+                </div>
+            </div>
         </div>
     )
 }

@@ -1801,27 +1801,42 @@ body {
 @media (max-width: 768px) {
     .profile-page {
         padding: var(--space-4) var(--space-2) !important;
+        overflow-x: hidden !important;
     }
 
     .profile-header {
         padding: var(--space-4) !important;
         margin-bottom: var(--space-4) !important;
+        overflow: hidden !important;
+        max-width: 100% !important;
+    }
+
+    .profile-info {
+        max-width: 100% !important;
+        overflow: hidden !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
     }
 
     .profile-avatar {
         width: 100px !important;
         height: 100px !important;
         margin-bottom: var(--space-3);
+        flex-shrink: 0 !important;
     }
 
     .profile-name {
         font-size: 28px !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
     }
 
     .profile-info {
         flex-direction: column !important;
         gap: var(--space-2) !important;
         text-align: center !important;
+        max-width: 100% !important;
     }
 
     .profile-stats {
@@ -1829,11 +1844,14 @@ body {
         flex-direction: column !important;
         gap: var(--space-2) !important;
         margin-top: var(--space-4) !important;
+        align-items: center !important;
     }
 
     .stat-card {
         padding: var(--space-3) !important;
         text-align: center !important;
+        width: 100% !important;
+        max-width: 200px !important;
     }
 
     .stat-number {
@@ -1847,78 +1865,102 @@ body {
     .buddy-search {
         padding-top: var(--space-3) !important;
         border-top: 1px solid var(--border-light) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
     }
 
     .buddy-search-input {
         padding: var(--space-2) !important;
         font-size: 14px !important;
+        max-width: 100% !important;
     }
 
     .buddy-result {
         padding: var(--space-3) !important;
         margin: var(--space-1) 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        word-wrap: break-word !important;
     }
 
     .profile-edit-form {
         margin-top: var(--space-4) !important;
         padding-top: var(--space-4) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
     }
 
     .profile-form-grid {
         grid-template-columns: 1fr !important;
         gap: var(--space-3) !important;
+        max-width: 100% !important;
     }
 
-    .profile-form-input {
-        padding: var(--space-3) !important;
-        font-size: 14px !important;
-    }
-
+    .profile-form-input,
     .profile-form-textarea {
         padding: var(--space-3) !important;
         font-size: 14px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .profile-buttons {
         gap: var(--space-2) !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
     }
 
     .profile-button {
         padding: var(--space-3) var(--space-4) !important;
         font-size: 14px !important;
+        min-width: 120px !important;
     }
 
     .profile-layout {
         gap: var(--space-4) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
     }
 
     .posts-section,
     .settings-section {
         padding: var(--space-4) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
     }
 
     .posts-title {
         font-size: 18px !important;
         margin-bottom: var(--space-3) !important;
+        word-wrap: break-word !important;
     }
 
     .post-item {
         padding: var(--space-3) !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        word-wrap: break-word !important;
     }
 
     .settings-title {
         font-size: 18px !important;
         margin-bottom: var(--space-3) !important;
+        word-wrap: break-word !important;
     }
 
     .password-form input {
         padding: var(--space-3) !important;
         font-size: 14px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .password-button {
         padding: var(--space-3) !important;
         font-size: 14px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 }
 

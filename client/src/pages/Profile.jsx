@@ -146,9 +146,17 @@ export default function Profile() {
                 padding: 'var(--space-8)',
                 border: '2px solid var(--border-light)',
                 boxShadow: 'var(--shadow-md)',
-                marginBottom: 'var(--space-6)'
+                marginBottom: 'var(--space-6)',
+                overflow: 'hidden'
             }}>
-                <div className="profile-info" style={{ display: 'flex', gap: 'var(--space-8)', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                <div className="profile-info" style={{
+                    display: 'flex',
+                    gap: 'var(--space-8)',
+                    alignItems: 'flex-start',
+                    flexWrap: 'wrap',
+                    maxWidth: '100%',
+                    overflow: 'hidden'
+                }}>
                     {/* Avatar */}
                     <div style={{ textAlign: 'center' }}>
                         {form.profilePic ? (
