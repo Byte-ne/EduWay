@@ -57,7 +57,7 @@ export default function Signup() {
         }
 
         try {
-            const res = await fetch(`https://eduway-server.onrender.com/api/auth/register`, {
+            const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password, username, age })

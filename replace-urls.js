@@ -7,11 +7,11 @@ function replaceInFile(filePath) {
         const originalContent = content;
 
         // Replace environment variables with hardcoded server URL for testing
-        content = content.replace(/\$\{import\.meta\.env\.VITE_API_URL\}/g, 'https://eduway-server.onrender.com');
-        content = content.replace(/\$\{import\.meta\.env\.VITE_API_URL \|\| "http:\/\/localhost:5000"\}/g, 'https://eduway-server.onrender.com');
+        content = content.replace(/\$\{import\.meta\.env\.VITE_API_URL\}/g, 'https://final-hackathon-me4n.onrender.com');
+        content = content.replace(/\$\{import\.meta\.env\.VITE_API_URL \|\| "http:\/\/localhost:5000"\}/g, 'https://final-hackathon-me4n.onrender.com');
         // Also replace the old variable name
-        content = content.replace(/__API_BASE_URL__/g, 'https://eduway-server.onrender.com');
-        content = content.replace(/__API_URL__/g, 'https://eduway-server.onrender.com');
+        content = content.replace(/__API_BASE_URL__/g, 'https://final-hackathon-me4n.onrender.com');
+        content = content.replace(/__API_URL__/g, 'https://final-hackathon-me4n.onrender.com');
 
         if (content !== originalContent) {
             fs.writeFileSync(filePath, content, 'utf8');
