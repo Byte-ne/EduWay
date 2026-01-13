@@ -669,7 +669,7 @@ export default function Feed() {
     }
 
     return (
-        <div style={{
+        <div className="feed-container" style={{
             display: 'flex',
             gap: 'var(--space-6)',
             padding: 'var(--space-6)',
@@ -677,9 +677,11 @@ export default function Feed() {
             margin: '0 auto',
             minHeight: 'calc(100vh - 72px)'
         }}>
-            <Sidebar active={activeTab} setActive={setActiveTab} />
+            <div className="sidebar">
+                <Sidebar active={activeTab} setActive={setActiveTab} />
+            </div>
 
-            <main style={{ flex: 1, minWidth: 0 }}>
+            <main className="main-content" style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ marginBottom: 'var(--space-6)' }}>
                     <h2 style={{
                         color: 'var(--text-primary)',
@@ -761,84 +763,480 @@ export default function Feed() {
                     </div>
                 ) : (
                     activeTab === 'groups' ? (
-                        <div style={{ display: 'flex', gap: 16 }}>
-                            <div style={{ width: groupsCollapsed ? 72 : 320, transition: 'width 180ms' }}>
-                                <div style={{ marginBottom: 12, display: 'flex', gap: 8, alignItems: 'center' }}>
-                                    <button type="button" onClick={async () => { const g = await createGroup('New Group'); if (g) selectGroup(g._id); }} style={{ flex: 1, padding: 10, borderRadius: 8, background: 'var(--primary)', color: '#fff', border: 'none', fontSize: groupsCollapsed ? '12px' : '14px' }}>
-                                        {groupsCollapsed ? '+' : 'New Group'}
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '16px',
+                            '@media (min-width: 768px)': {
+                                flexDirection: 'row'
+                            }
+                        }}>
+                            {/* Groups List - Mobile First Design */}
+                            <div style={{
+                                width: '100%',
+                                '@media (min-width: 768px)': {
+                                    width: groupsCollapsed ? '72px' : '320px'
+                                },
+                                transition: 'width 180ms'
+                            }}>
+                                {/* Header with Create Button */}
+                                <div style={{
+                                    marginBottom: '12px',
+                                    display: 'flex',
+                                    gap: '8px',
+                                    alignItems: 'center',
+                                    padding: '16px',
+                                    background: 'var(--white)',
+                                    borderRadius: '16px',
+                                    border: '1px solid var(--border-light)',
+                                    boxShadow: 'var(--shadow-sm)'
+                                }}>
+                                    <button
+                                        type="button"
+                                        onClick={async () => { const g = await createGroup('New Study Group'); if (g) selectGroup(g._id); }}
+                                        style={{
+                                            flex: 1,
+                                            padding: '12px',
+                                            borderRadius: '12px',
+                                            background: 'linear-gradient(135deg, var(--primary), var(--primary-dark))',
+                                            color: '#fff',
+                                            border: 'none',
+                                            fontSize: '14px',
+                                            fontWeight: '600',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '8px',
+                                            boxShadow: 'var(--shadow-sm)',
+                                            transition: 'all var(--transition-base)'
+                                        }}
+                                    >
+                                        <Users size={16} />
+                                        {groupsCollapsed ? '+' : 'Create Group'}
                                     </button>
-                                    <button type="button" onClick={() => loadGroups()} style={{ padding: 10, borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Refresh</button>
-                                    <button type="button" onClick={() => setGroupsCollapsed(s => !s)} style={{ padding: 8, borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>
-                                        {groupsCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
+                                    <button
+                                        type="button"
+                                        onClick={() => loadGroups()}
+                                        style={{
+                                            padding: '12px',
+                                            borderRadius: '12px',
+                                            border: '1px solid var(--border-light)',
+                                            background: 'var(--white)',
+                                            cursor: 'pointer',
+                                            transition: 'all var(--transition-base)'
+                                        }}
+                                        title="Refresh groups"
+                                    >
+                                        🔄
                                     </button>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                    {groups.length > 0 ? groups.map(g => (
-                                        <div key={g._id} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                            <button type="button" onClick={() => selectGroup(g._id)} style={{ textAlign: groupsCollapsed ? 'center' : 'left', padding: groupsCollapsed ? 8 : 10, borderRadius: 8, background: selectedGroup && selectedGroup._id === g._id ? 'rgba(138,108,255,0.08)' : 'var(--white)', border: '1px solid var(--border-light)', width: '100%' }}>{groupsCollapsed ? (g.name?.charAt(0)?.toUpperCase() || 'G') : (<><div style={{ fontWeight: 700 }}>{g.name}</div><div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{g.members?.length || 0} members</div></>)}</button>
-                                            {!groupsCollapsed && <button type="button" onClick={() => setAddMemberModal({ open: true, groupId: g._id })} style={{ padding: 8, border: 'none', background: 'transparent', cursor: 'pointer' }} title="Add member"><UserPlus size={18} /></button>}
-                                            {!groupsCollapsed && <button type="button" onClick={async () => {
-                                                if (!window.confirm('Delete this group?')) return
-                                                try {
-                                                    const token = localStorage.getItem('token')
-                                                    const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${g._id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } })
-                                                    if (res.ok) { loadGroups(); if (selectedGroup && selectedGroup._id === g._id) setSelectedGroup(null) }
-                                                    else { const d = await res.json(); alert(d.message || 'Failed') }
-                                                } catch (e) { alert('Failed') }
-                                            }} style={{ padding: 8, border: 'none', background: 'transparent', cursor: 'pointer' }} title="Delete group"><Trash size={16} /></button>}
-                                        </div>
-                                    )) : <div style={{ padding: 20, color: 'var(--text-secondary)' }}>No groups yet</div>}
-                                </div>
-                            </div>
-                            <div style={{ flex: 1 }}>
-                                {selectedGroup ? (
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                            {renaming ? (
-                                                <>
-                                                    <input value={newGroupName} onChange={e => setNewGroupName(e.target.value)} placeholder="Group name" style={{ padding: 8, borderRadius: 8, border: '1px solid var(--border-light)', flex: 1 }} />
-                                                    <button type="button" onClick={() => renameGroup(selectedGroup._id, newGroupName)} style={{ padding: '8px 10px', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Save</button>
-                                                    <button type="button" onClick={() => { setRenaming(false); setNewGroupName('') }} style={{ padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Cancel</button>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <h3 style={{ margin: 0, flex: 1 }}>{selectedGroup.name}</h3>
-                                                    <button type="button" onClick={() => { setRenaming(true); setNewGroupName(selectedGroup.name || '') }} style={{ padding: 8, border: 'none', background: 'transparent', cursor: 'pointer' }} title="Rename group"><Edit3 size={18} /></button>
-                                                </>
-                                            )}
-                                        </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxHeight: '60vh', overflowY: 'auto', padding: 8 }}>
-                                            {groupMessages.map((m, i) => (
-                                                <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                                                    <div style={{ width: 40, height: 40, borderRadius: 999, background: 'var(--off-white)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{m.author?.name?.charAt(0)?.toUpperCase()}</div>
-                                                    <div style={{ background: 'var(--white)', padding: 10, borderRadius: 8, boxShadow: 'var(--shadow-sm)' }}>
-                                                        <div style={{ fontWeight: 700 }}>{m.author?.name}</div>
-                                                        <div style={{ color: 'var(--text-secondary)' }}>{m.text}</div>
+
+                                {/* Groups List */}
+                                <div style={{
+                                    background: 'var(--white)',
+                                    borderRadius: '16px',
+                                    border: '1px solid var(--border-light)',
+                                    boxShadow: 'var(--shadow-sm)',
+                                    overflow: 'hidden'
+                                }}>
+                                    <div style={{
+                                        padding: '16px',
+                                        borderBottom: '1px solid var(--border-light)',
+                                        background: 'var(--off-white)'
+                                    }}>
+                                        <h4 style={{
+                                            margin: 0,
+                                            fontSize: '16px',
+                                            fontWeight: '700',
+                                            color: 'var(--text-primary)'
+                                        }}>
+                                            Study Groups ({groups.length})
+                                        </h4>
+                                    </div>
+
+                                    <div style={{
+                                        maxHeight: '400px',
+                                        overflowY: 'auto',
+                                        padding: groups.length === 0 ? '20px' : '8px'
+                                    }}>
+                                        {groups.length > 0 ? groups.map(g => (
+                                            <div
+                                                key={g._id}
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '12px',
+                                                    padding: '12px',
+                                                    margin: '4px 8px',
+                                                    borderRadius: '12px',
+                                                    cursor: 'pointer',
+                                                    transition: 'all var(--transition-fast)',
+                                                    background: selectedGroup && selectedGroup._id === g._id ? 'var(--primary-light)' : 'transparent',
+                                                    border: selectedGroup && selectedGroup._id === g._id ? '2px solid var(--primary)' : '2px solid transparent'
+                                                }}
+                                                onClick={() => selectGroup(g._id)}
+                                            >
+                                                {/* Group Avatar */}
+                                                <div style={{
+                                                    width: '48px',
+                                                    height: '48px',
+                                                    borderRadius: '50%',
+                                                    background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    color: 'var(--white)',
+                                                    fontSize: '18px',
+                                                    fontWeight: '700'
+                                                }}>
+                                                    {g.name?.charAt(0)?.toUpperCase() || 'G'}
+                                                </div>
+
+                                                {/* Group Info */}
+                                                <div style={{ flex: 1, minWidth: 0 }}>
+                                                    <div style={{
+                                                        fontSize: '15px',
+                                                        fontWeight: '600',
+                                                        color: 'var(--text-primary)',
+                                                        marginBottom: '2px',
+                                                        overflow: 'hidden',
+                                                        textOverflow: 'ellipsis',
+                                                        whiteSpace: 'nowrap'
+                                                    }}>
+                                                        {g.name}
                                                     </div>
-                                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                        <button type="button" onClick={async () => {
-                                                            if (!window.confirm('Delete this message?')) return
-                                                            try {
-                                                                const token = localStorage.getItem('token')
-                                                                const res = await fetch(`https://final-hackathon-me4n.onrender.com/api/groups/${selectedGroup._id}/messages/${m._id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } })
-                                                                if (res.ok) {
-                                                                    setGroupMessages(prev => prev.filter(x => x._id !== m._id))
-                                                                } else {
-                                                                    const d = await res.json(); alert(d.message || 'Failed')
-                                                                }
-                                                            } catch (e) { alert('Failed') }
-                                                        }} style={{ padding: 6, marginLeft: 6, border: 'none', background: 'transparent', cursor: 'pointer' }} title="Delete message"><Trash size={14} /></button>
+                                                    <div style={{
+                                                        fontSize: '13px',
+                                                        color: 'var(--text-secondary)'
+                                                    }}>
+                                                        {g.members?.length || 0} members
                                                     </div>
                                                 </div>
-                                            ))}
+                                            </div>
+                                        )) : (
+                                            <div style={{
+                                                textAlign: 'center',
+                                                color: 'var(--text-secondary)',
+                                                fontSize: '14px'
+                                            }}>
+                                                No study groups yet
+                                                <br />
+                                                <span style={{ fontSize: '12px' }}>Create your first group above!</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Chat Area - WhatsApp/Instagram Style */}
+                            <div style={{
+                                flex: 1,
+                                minWidth: 0,
+                                height: 'calc(100vh - 200px)',
+                                '@media (min-width: 768px)': {
+                                    height: '600px'
+                                }
+                            }}>
+                                {selectedGroup ? (
+                                    <div style={{
+                                        height: '100%',
+                                        background: 'var(--white)',
+                                        borderRadius: '16px',
+                                        border: '1px solid var(--border-light)',
+                                        boxShadow: 'var(--shadow-sm)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        overflow: 'hidden'
+                                    }}>
+                                        {/* Chat Header - Instagram/WhatsApp Style */}
+                                        <div style={{
+                                            padding: '16px',
+                                            borderBottom: '1px solid var(--border-light)',
+                                            background: 'var(--off-white)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '12px'
+                                        }}>
+                                            <div style={{
+                                                width: '40px',
+                                                height: '40px',
+                                                borderRadius: '50%',
+                                                background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: 'var(--white)',
+                                                fontSize: '16px',
+                                                fontWeight: '700'
+                                            }}>
+                                                {selectedGroup.name?.charAt(0)?.toUpperCase() || 'G'}
+                                            </div>
+                                            <div style={{ flex: 1 }}>
+                                                {renaming ? (
+                                                    <div style={{ display: 'flex', gap: '8px' }}>
+                                                        <input
+                                                            value={newGroupName}
+                                                            onChange={e => setNewGroupName(e.target.value)}
+                                                            placeholder="Group name"
+                                                            style={{
+                                                                flex: 1,
+                                                                padding: '6px 8px',
+                                                                borderRadius: '6px',
+                                                                border: '1px solid var(--border-light)',
+                                                                fontSize: '14px'
+                                                            }}
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => renameGroup(selectedGroup._id, newGroupName)}
+                                                            style={{
+                                                                padding: '6px 12px',
+                                                                borderRadius: '6px',
+                                                                background: 'var(--primary)',
+                                                                color: '#fff',
+                                                                border: 'none',
+                                                                fontSize: '12px',
+                                                                cursor: 'pointer'
+                                                            }}
+                                                        >
+                                                            Save
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => { setRenaming(false); setNewGroupName('') }}
+                                                            style={{
+                                                                padding: '6px 12px',
+                                                                borderRadius: '6px',
+                                                                border: '1px solid var(--border-light)',
+                                                                background: 'transparent',
+                                                                fontSize: '12px',
+                                                                cursor: 'pointer'
+                                                            }}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <div style={{
+                                                            fontSize: '16px',
+                                                            fontWeight: '600',
+                                                            color: 'var(--text-primary)',
+                                                            marginBottom: '2px'
+                                                        }}>
+                                                            {selectedGroup.name}
+                                                        </div>
+                                                        <div style={{
+                                                            fontSize: '13px',
+                                                            color: 'var(--text-secondary)'
+                                                        }}>
+                                                            {selectedGroup.members?.length || 0} members
+                                                        </div>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <div style={{ display: 'flex', gap: '4px' }}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => { setRenaming(true); setNewGroupName(selectedGroup.name || '') }}
+                                                    style={{
+                                                        padding: '8px',
+                                                        border: 'none',
+                                                        background: 'transparent',
+                                                        cursor: 'pointer',
+                                                        borderRadius: '50%',
+                                                        width: '32px',
+                                                        height: '32px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center'
+                                                    }}
+                                                    title="Rename group"
+                                                >
+                                                    <Edit3 size={16} />
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setAddMemberModal({ open: true, groupId: selectedGroup._id })}
+                                                    style={{
+                                                        padding: '8px',
+                                                        border: 'none',
+                                                        background: 'transparent',
+                                                        cursor: 'pointer',
+                                                        borderRadius: '50%',
+                                                        width: '32px',
+                                                        height: '32px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center'
+                                                    }}
+                                                    title="Add member"
+                                                >
+                                                    <UserPlus size={16} />
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div style={{ display: 'flex', gap: 8 }}>
-                                            <input value={groupMessageText} onChange={e => setGroupMessageText(e.target.value)} placeholder="Write a message" style={{ flex: 1, padding: 10, borderRadius: 8, border: '1px solid var(--border-light)' }} />
-                                            <button type="button" onClick={async () => { if (groupMessageText.trim()) { await sendGroupMessage(selectedGroup._id, groupMessageText); setGroupMessageText('') } }} style={{ padding: '10px 12px', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Send</button>
+
+                                        {/* Messages Area - WhatsApp Style */}
+                                        <div style={{
+                                            flex: 1,
+                                            overflowY: 'auto',
+                                            padding: '16px',
+                                            background: 'var(--off-white)',
+                                            backgroundImage: 'radial-gradient(circle, var(--border-light) 1px, transparent 1px)',
+                                            backgroundSize: '20px 20px'
+                                        }}>
+                                            {groupMessages.length === 0 ? (
+                                                <div style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    height: '100%',
+                                                    color: 'var(--text-secondary)',
+                                                    textAlign: 'center'
+                                                }}>
+                                                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>💬</div>
+                                                    <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>
+                                                        Welcome to {selectedGroup.name}!
+                                                    </div>
+                                                    <div style={{ fontSize: '14px' }}>
+                                                        Start a conversation with your study group
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                                    {groupMessages.map((m, i) => (
+                                                        <div
+                                                            key={i}
+                                                            style={{
+                                                                display: 'flex',
+                                                                alignItems: 'flex-start',
+                                                                gap: '8px',
+                                                                marginBottom: '4px'
+                                                            }}
+                                                        >
+                                                            {/* Message Bubble */}
+                                                            <div style={{
+                                                                maxWidth: '70%',
+                                                                padding: '12px 16px',
+                                                                borderRadius: '18px',
+                                                                background: 'var(--white)',
+                                                                boxShadow: 'var(--shadow-sm)',
+                                                                position: 'relative'
+                                                            }}>
+                                                                <div style={{
+                                                                    fontSize: '14px',
+                                                                    color: 'var(--text-primary)',
+                                                                    lineHeight: '1.4',
+                                                                    marginBottom: '4px'
+                                                                }}>
+                                                                    <strong style={{
+                                                                        fontWeight: '600',
+                                                                        color: 'var(--primary)',
+                                                                        marginRight: '8px'
+                                                                    }}>
+                                                                        {m.author?.name}
+                                                                    </strong>
+                                                                    {m.text}
+                                                                </div>
+                                                                <div style={{
+                                                                    fontSize: '11px',
+                                                                    color: 'var(--text-secondary)',
+                                                                    textAlign: 'right'
+                                                                }}>
+                                                                    {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Message Input - WhatsApp Style */}
+                                        <div style={{
+                                            padding: '16px',
+                                            borderTop: '1px solid var(--border-light)',
+                                            background: 'var(--white)',
+                                            display: 'flex',
+                                            gap: '12px',
+                                            alignItems: 'center'
+                                        }}>
+                                            <input
+                                                value={groupMessageText}
+                                                onChange={e => setGroupMessageText(e.target.value)}
+                                                onKeyDown={e => {
+                                                    if (e.key === 'Enter' && !e.shiftKey) {
+                                                        e.preventDefault()
+                                                        if (groupMessageText.trim()) {
+                                                            sendGroupMessage(selectedGroup._id, groupMessageText)
+                                                            setGroupMessageText('')
+                                                        }
+                                                    }
+                                                }}
+                                                placeholder="Type a message..."
+                                                style={{
+                                                    flex: 1,
+                                                    padding: '12px 16px',
+                                                    borderRadius: '24px',
+                                                    border: '1px solid var(--border-light)',
+                                                    outline: 'none',
+                                                    fontSize: '14px',
+                                                    background: 'var(--off-white)'
+                                                }}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={async () => {
+                                                    if (groupMessageText.trim()) {
+                                                        await sendGroupMessage(selectedGroup._id, groupMessageText)
+                                                        setGroupMessageText('')
+                                                    }
+                                                }}
+                                                style={{
+                                                    width: '48px',
+                                                    height: '48px',
+                                                    borderRadius: '50%',
+                                                    background: 'var(--primary)',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    boxShadow: 'var(--shadow-sm)',
+                                                    transition: 'all var(--transition-base)'
+                                                }}
+                                            >
+                                                📤
+                                            </button>
                                         </div>
                                     </div>
                                 ) : (
-                                    <div style={{ padding: 20, color: 'var(--text-secondary)' }}>Select a group to open the chat</div>
+                                    <div style={{
+                                        height: '100%',
+                                        background: 'var(--white)',
+                                        borderRadius: '16px',
+                                        border: '1px solid var(--border-light)',
+                                        boxShadow: 'var(--shadow-sm)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: 'var(--text-secondary)',
+                                        textAlign: 'center',
+                                        padding: '40px'
+                                    }}>
+                                        <div style={{ fontSize: '64px', marginBottom: '16px' }}>👥</div>
+                                        <div style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px' }}>
+                                            Select a Study Group
+                                        </div>
+                                        <div style={{ fontSize: '14px', lineHeight: '1.5' }}>
+                                            Choose a group from the sidebar to start chatting with your study buddies
+                                        </div>
+                                    </div>
                                 )}
                             </div>
 

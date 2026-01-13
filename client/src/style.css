@@ -716,15 +716,63 @@ body {
     transform: translateY(-2px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
     .nav-container {
-        height: 64px;
         padding: 0 var(--space-4);
     }
 
+    .right-sidebar {
+        display: none;
+    }
+
+    /* Feed Layout */
+    .feed-container {
+        gap: var(--space-4) !important;
+        padding: var(--space-4) !important;
+    }
+
+    .sidebar {
+        width: 240px !important;
+    }
+
+    .main-content {
+        max-width: none !important;
+    }
+
+    /* Study Groups */
+    .groups-layout {
+        flex-direction: column !important;
+        gap: var(--space-4) !important;
+    }
+
+    .groups-sidebar {
+        width: 100% !important;
+        order: 2 !important;
+    }
+
+    .chat-area {
+        width: 100% !important;
+        height: 400px !important;
+        order: 1 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-container {
+        height: 60px;
+        padding: 0 var(--space-3);
+    }
+
     .nav-logo {
-        font-size: 18px;
+        font-size: 16px;
+        gap: var(--space-2);
+    }
+
+    .nav-logo svg {
+        width: 24px;
+        height: 24px;
     }
 
     .nav-links {
@@ -732,20 +780,205 @@ body {
     }
 
     .nav-link {
-        padding: var(--space-2) var(--space-3);
-        font-size: 13px;
+        padding: var(--space-2);
+        font-size: 12px;
+        gap: var(--space-1);
+    }
+
+    /* Main Layout */
+    .feed-container {
+        flex-direction: column !important;
+        gap: var(--space-3) !important;
+        padding: var(--space-2) !important;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        order: 2 !important;
+        margin-bottom: var(--space-4);
+    }
+
+    .main-content {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    /* Auth Pages */
+    .auth-shell {
+        padding: var(--space-4) var(--space-2);
     }
 
     .auth-card {
-        padding: var(--space-8) var(--space-6);
+        padding: var(--space-6) var(--space-4);
+        border-radius: var(--radius-xl);
     }
 
     .title {
-        font-size: 28px;
+        font-size: 24px;
+        margin: var(--space-6) 0 var(--space-2);
     }
 
+    .subtitle {
+        font-size: 14px;
+        margin: 0 0 var(--space-6);
+    }
+
+    /* Study Groups Mobile */
+    .groups-layout {
+        gap: var(--space-3) !important;
+    }
+
+    .groups-sidebar {
+        padding: var(--space-3) !important;
+    }
+
+    .group-item {
+        padding: var(--space-3) !important;
+        gap: var(--space-3) !important;
+    }
+
+    .group-avatar {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .chat-area {
+        height: 300px !important;
+    }
+
+    .chat-header {
+        padding: var(--space-3) !important;
+    }
+
+    .message-bubble {
+        max-width: 85% !important;
+        padding: var(--space-3) !important;
+    }
+
+    .message-input {
+        padding: var(--space-3) !important;
+        gap: var(--space-2) !important;
+    }
+
+    .send-button {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    /* Post Cards */
+    .post-card {
+        padding: var(--space-4) !important;
+        margin-bottom: var(--space-3) !important;
+    }
+
+    .post-header {
+        gap: var(--space-3) !important;
+    }
+
+    .post-avatar {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    /* Buttons */
+    .submit {
+        padding: 14px var(--space-4) !important;
+        font-size: 15px !important;
+    }
+
+    /* Loading */
     .loading-percentage {
-        font-size: 48px;
+        font-size: 36px;
+    }
+
+    .loading-message {
+        font-size: 14px;
+    }
+
+    /* Modal */
+    .modal-dialog {
+        margin: var(--space-2);
+        max-width: none;
+        width: calc(100vw - var(--space-4));
+        max-height: calc(100vh - var(--space-4));
+    }
+
+    /* Notifications */
+    .notif-dropdown {
+        width: calc(100vw - var(--space-4));
+        right: var(--space-2);
+        left: var(--space-2);
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small screens */
+    .nav-container {
+        height: 56px;
+        padding: 0 var(--space-2);
+    }
+
+    .nav-logo {
+        font-size: 14px;
+    }
+
+    .feed-container {
+        padding: var(--space-1) !important;
+    }
+
+    .sidebar {
+        margin-bottom: var(--space-2);
+    }
+
+    .auth-card {
+        padding: var(--space-4) var(--space-3);
+    }
+
+    .title {
+        font-size: 20px;
+        margin: var(--space-4) 0 var(--space-2);
+    }
+
+    .field input {
+        padding: 12px 14px 12px 44px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .post-card {
+        padding: var(--space-3) !important;
+    }
+
+    .chat-area {
+        height: 250px !important;
+    }
+
+    .message-bubble {
+        font-size: 14px !important;
+    }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+    .nav-link:hover,
+    .chip:hover,
+    .card:hover,
+    .post-card:hover {
+        transform: none !important;
+    }
+
+    /* Larger touch targets */
+    .nav-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .submit {
+        min-height: 48px;
+    }
+
+    button, .chip {
+        min-height: 44px;
     }
 }
 
