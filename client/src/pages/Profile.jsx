@@ -412,13 +412,13 @@ export default function Profile() {
                                                         <div style={{ display: 'flex', gap: 8 }}>
                                                             <button type="button" onClick={async () => {
                                                                 const token = localStorage.getItem('token')
-                                                                await fetch('/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'accept' }) })
+                                                                await fetch('${__API_URL__}/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'accept' }) })
                                                                 setNotifications(prev => prev.filter(x => x !== n))
                                                                 load()
                                                             }} style={{ padding: '8px 10px', borderRadius: 8, background: 'var(--accent-green)', color: '#fff', border: 'none' }}>Accept</button>
                                                             <button type="button" onClick={async () => {
                                                                 const token = localStorage.getItem('token')
-                                                                await fetch('/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'reject' }) })
+                                                                await fetch('${__API_URL__}/api/auth/respond-buddy', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ buddyId: n.from._id || n.from.id, action: 'reject' }) })
                                                                 setNotifications(prev => prev.filter(x => x !== n))
                                                             }} style={{ padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Reject</button>
                                                         </div>
@@ -439,7 +439,7 @@ export default function Profile() {
                                                             <button type="button" onClick={async () => {
                                                                 try {
                                                                     const token = localStorage.getItem('token')
-                                                                    const res = await fetch(`/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: true }) })
+                                                                    const res = await fetch(`${__API_URL__}/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: true }) })
                                                                     const d = await res.json()
                                                                     // store pending challenge so Feed can pick it up after redirect
                                                                     if (res.ok) {
@@ -453,7 +453,7 @@ export default function Profile() {
                                                             <button type="button" onClick={async () => {
                                                                 try {
                                                                     const token = localStorage.getItem('token')
-                                                                    await fetch(`/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: false }) })
+                                                                    await fetch(`${__API_URL__}/api/challenges/${n.meta && n.meta.challengeId}/respond`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ accept: false }) })
                                                                     setNotifications(prev => prev.filter(x => x !== n))
                                                                 } catch (e) { }
                                                             }} style={{ padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border-light)', background: 'transparent' }}>Decline</button>
