@@ -7,7 +7,9 @@ function replaceInFile(filePath) {
         const originalContent = content;
 
         // Replace localhost URLs with environment variable
-        content = content.replace(/http:\/\/localhost:5000/g, '${__API_BASE_URL__}');
+        content = content.replace(/http:\/\/localhost:5000/g, '${__API_URL__}');
+        // Also replace the old variable name
+        content = content.replace(/__API_BASE_URL__/g, '__API_URL__');
 
         if (content !== originalContent) {
             fs.writeFileSync(filePath, content, 'utf8');
