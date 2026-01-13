@@ -14,7 +14,7 @@ export default function Study() {
         setLoadingAi(true)
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch('${__API_URL__}/api/study/ask-ai', {
+            const res = await fetch('${import.meta.env.VITE_API_URL}/api/study/ask-ai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default function Study() {
         setLoadingQuestions(true)
         try {
             const token = localStorage.getItem('token')
-            const res = await fetch('${__API_URL__}/api/study/generate-questions', {
+            const res = await fetch('${import.meta.env.VITE_API_URL}/api/study/generate-questions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

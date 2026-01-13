@@ -7,12 +7,13 @@ function replaceInFile(filePath) {
         const originalContent = content;
 
         // Replace localhost URLs with environment variable
-        content = content.replace(/http:\/\/localhost:5000/g, '${__API_URL__}');
+        content = content.replace(/http:\/\/localhost:5000/g, '${import.meta.env.VITE_API_URL}');
         // Also replace the old variable name
-        content = content.replace(/__API_BASE_URL__/g, '__API_URL__');
+        content = content.replace(/__API_BASE_URL__/g, 'import.meta.env.VITE_API_URL');
+        content = content.replace(/__API_URL__/g, 'import.meta.env.VITE_API_URL');
         // Replace relative API calls
-        content = content.replace(/'\/api\//g, "'${__API_URL__}/api/");
-        content = content.replace(/`\/api\//g, "`${__API_URL__}/api/");
+        content = content.replace(/'\/api\//g, "'${import.meta.env.VITE_API_URL}/api/");
+        content = content.replace(/`\/api\//g, "`${import.meta.env.VITE_API_URL}/api/");
 
         if (content !== originalContent) {
             fs.writeFileSync(filePath, content, 'utf8');

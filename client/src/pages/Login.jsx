@@ -50,7 +50,7 @@ export default function Login() {
         setLoading(true)
 
         try {
-            const res = await fetch(`${__API_URL__}/api/auth/forgot-password`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/forgot-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: resetEmail })
@@ -76,7 +76,7 @@ export default function Login() {
         setLoading(true)
 
         try {
-            const res = await fetch(`${__API_URL__}/api/auth/verify-reset-code`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-reset-code`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: resetEmail, code: resetCode })
@@ -107,7 +107,7 @@ export default function Login() {
         setLoading(true)
 
         try {
-            const res = await fetch(`${__API_URL__}/api/auth/reset-password`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/reset-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: resetEmail, code: resetCode, newPassword })
@@ -134,7 +134,7 @@ export default function Login() {
         setLoading(true)
 
         try {
-            const res = await fetch(`${__API_URL__}/api/auth/login`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
