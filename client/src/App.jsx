@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
-import { Compass, Home, UserCircle, LogOut, MapPin, Newspaper, Bell, Lightbulb, BookOpen, FileText } from 'lucide-react'
+import { Compass, Home, UserCircle, LogOut, MapPin, Newspaper, Bell, Lightbulb, BookOpen, FileText, Menu, X } from 'lucide-react'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
@@ -16,6 +16,7 @@ function Navigation() {
     const [notifications, setNotifications] = React.useState([])
     const [unread, setUnread] = React.useState(0)
     const [showNotif, setShowNotif] = React.useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
     async function fetchNotifications() {
         try {
@@ -62,7 +63,8 @@ function Navigation() {
                     EduWay
                 </Link>
 
-                <div className="nav-links">
+                {/* Desktop Navigation */}
+                <div className="nav-links desktop-nav">
                     {isAuthenticated ? (
                         <>
                             <Link to="/" className="nav-link">
@@ -141,6 +143,99 @@ function Navigation() {
                         </>
                     )}
                 </div>
+
+                {/* Mobile Menu Button */}
+                <button
+                    type="button"
+                    className="mobile-menu-btn"
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    aria-label="Toggle mobile menu"
+                >
+                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+
+                {/* Mobile Navigation Menu */}
+                {mobileMenuOpen && (
+                    <div className="mobile-nav-menu">
+                        {isAuthenticated ? (
+                            <>
+                                <Link to="/" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                                    <Home size={20} />
+                                    Home
+                                </Link>
+                                <Link to="/feed" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                                    <Newspaper size={20} />
+                                    Feed
+                                </Link>
+                                <Link to="/study" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                                    <Lightbulb size={20} />
+                                    Study
+                                </Link>
+                                <Link to="/question-bank" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                                    <BookOpen size={20} />
+                                    Question Bank
+                                </Link>
+                                <Link to="/exam-details" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                                    <FileText size={20} />
+                                    Exam Details
+                                </Link>
+                                <Link to="/profile" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                                    <UserCircle size={20} />
+                                    Profile
+                                </Link>
+                                <div style={{ position: 'relative' }}>
+                                    <button type="button" className="mobile-nav-link" onClick={() => { setShowNotif(s => !s); if (!showNotif) fetchNotifications() }} style={{ position: 'relative', width: '100%', justifyContent: 'flex-start' }}>
+                                        <Bell size={20} />
+                                        Notifications
+                                        {unread > 0 && <span className="notif-badge">{unread}</span>}
+                                    </button>
+                                    {showNotif && (
+                                        <div className="mobile-notif-dropdown">
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid var(--border-light)' }}>
+                                                <strong>Notifications</strong>
+                                                <button type="button" onClick={markAll} style={{ background: 'transparent', border: 'none', color: 'var(--primary-blue)', cursor: 'pointer' }}>Mark all read</button>
+                                            </div>
+                                            <div style={{ maxHeight: 300, overflowY: 'auto' }}>
+                                                {notifications.length === 0 && <div style={{ padding: 16, color: 'var(--text-secondary)' }}>No notifications</div>}
+                                                {notifications.map((n) => (
+                                                    <div key={n._id} className="notif-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <div style={{ padding: 12 }}>
+                                                            <div style={{ fontWeight: 600 }}>{n.type.replace('_', ' ')}</div>
+                                                            <div style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{n.text}</div>
+                                                            <div style={{ fontSize: 12, color: 'var(--text-tertiary)' }}>{new Date(n.createdAt).toLocaleString()}</div>
+                                                        </div>
+                                                        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 8 }}>
+                                                            {!n.read && <button type="button" onClick={() => markRead(n._id)} style={{ padding: '8px 12px', borderRadius: 8, background: 'var(--primary-blue)', color: '#fff', border: 'none' }}>Mark read</button>}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                                    className="mobile-nav-link"
+                                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', width: '100%', justifyContent: 'flex-start' }}
+                                >
+                                    <LogOut size={20} />
+                                    Sign out
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/login" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                                    <MapPin size={20} />
+                                    Sign in
+                                </Link>
+                                <Link to="/signup" className="mobile-nav-link primary" onClick={() => setMobileMenuOpen(false)}>
+                                    Get Started
+                                </Link>
+                            </>
+                        )}
+                    </div>
+                )}
             </div>
         </nav>
     )
@@ -219,8 +314,8 @@ function HomePage() {
                             marginBottom: '24px',
                             letterSpacing: '-0.03em'
                         }}>
-                            Your Path to<br/>
-                            <span style={{ 
+                            Your Path to<br />
+                            <span style={{
                                 background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
@@ -302,7 +397,7 @@ function HomePage() {
                                 borderRadius: 'var(--radius-2xl)',
                                 opacity: 0.1,
                                 filter: 'blur(40px)'
-                            }}/>
+                            }} />
                             🎓
                         </div>
                     </div>
