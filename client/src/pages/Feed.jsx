@@ -833,15 +833,9 @@ export default function Feed() {
                                 </div>
 
                                 {/* Groups List */}
-                                <div style={{
-                                    background: 'var(--white)',
-                                    borderRadius: '16px',
-                                    border: '1px solid var(--border-light)',
-                                    boxShadow: 'var(--shadow-sm)',
-                                    overflow: 'hidden'
-                                }}>
+                                <div className="groups-sidebar">
                                     <div style={{
-                                        padding: '16px',
+                                        padding: 'var(--space-4)',
                                         borderBottom: '1px solid var(--border-light)',
                                         background: 'var(--off-white)'
                                     }}>
@@ -856,29 +850,20 @@ export default function Feed() {
                                     </div>
 
                                     <div style={{
-                                        maxHeight: '400px',
                                         overflowY: 'auto',
-                                        padding: groups.length === 0 ? '20px' : '8px'
+                                        padding: groups.length === 0 ? '20px' : 'var(--space-2)'
                                     }}>
                                         {groups.length > 0 ? groups.map(g => (
                                             <div
                                                 key={g._id}
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '12px',
-                                                    padding: '12px',
-                                                    margin: '4px 8px',
-                                                    borderRadius: '12px',
-                                                    cursor: 'pointer',
-                                                    transition: 'all var(--transition-fast)',
-                                                    background: selectedGroup && selectedGroup._id === g._id ? 'var(--primary-light)' : 'transparent',
-                                                    border: selectedGroup && selectedGroup._id === g._id ? '2px solid var(--primary)' : '2px solid transparent'
-                                                }}
+                                                className="group-item"
                                                 onClick={() => selectGroup(g._id)}
+                                                style={{
+                                                    borderBottom: g === groups[groups.length - 1] ? 'none' : '1px solid var(--border-light)'
+                                                }}
                                             >
                                                 {/* Group Avatar */}
-                                                <div style={{
+                                                <div className="group-avatar" style={{
                                                     width: '48px',
                                                     height: '48px',
                                                     borderRadius: '50%',
@@ -894,22 +879,11 @@ export default function Feed() {
                                                 </div>
 
                                                 {/* Group Info */}
-                                                <div style={{ flex: 1, minWidth: 0 }}>
-                                                    <div style={{
-                                                        fontSize: '15px',
-                                                        fontWeight: '600',
-                                                        color: 'var(--text-primary)',
-                                                        marginBottom: '2px',
-                                                        overflow: 'hidden',
-                                                        textOverflow: 'ellipsis',
-                                                        whiteSpace: 'nowrap'
-                                                    }}>
+                                                <div className="group-info">
+                                                    <div className="group-name">
                                                         {g.name}
                                                     </div>
-                                                    <div style={{
-                                                        fontSize: '13px',
-                                                        color: 'var(--text-secondary)'
-                                                    }}>
+                                                    <div className="group-members">
                                                         {g.members?.length || 0} members
                                                     </div>
                                                 </div>
@@ -918,7 +892,8 @@ export default function Feed() {
                                             <div style={{
                                                 textAlign: 'center',
                                                 color: 'var(--text-secondary)',
-                                                fontSize: '14px'
+                                                fontSize: '14px',
+                                                padding: 'var(--space-4) 0'
                                             }}>
                                                 No study groups yet
                                                 <br />
@@ -939,25 +914,9 @@ export default function Feed() {
                                 }
                             }}>
                                 {selectedGroup ? (
-                                    <div style={{
-                                        height: '100%',
-                                        background: 'var(--white)',
-                                        borderRadius: '16px',
-                                        border: '1px solid var(--border-light)',
-                                        boxShadow: 'var(--shadow-sm)',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        overflow: 'hidden'
-                                    }}>
+                                    <div className="chat-area">
                                         {/* Chat Header - Instagram/WhatsApp Style */}
-                                        <div style={{
-                                            padding: '16px',
-                                            borderBottom: '1px solid var(--border-light)',
-                                            background: 'var(--off-white)',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '12px'
-                                        }}>
+                                        <div className="chat-header">
                                             <div style={{
                                                 width: '40px',
                                                 height: '40px',
@@ -1079,14 +1038,7 @@ export default function Feed() {
                                         </div>
 
                                         {/* Messages Area - WhatsApp Style */}
-                                        <div style={{
-                                            flex: 1,
-                                            overflowY: 'auto',
-                                            padding: '16px',
-                                            background: 'var(--off-white)',
-                                            backgroundImage: 'radial-gradient(circle, var(--border-light) 1px, transparent 1px)',
-                                            backgroundSize: '20px 20px'
-                                        }}>
+                                        <div className="messages-area">
                                             {groupMessages.length === 0 ? (
                                                 <div style={{
                                                     display: 'flex',
@@ -1118,14 +1070,7 @@ export default function Feed() {
                                                             }}
                                                         >
                                                             {/* Message Bubble */}
-                                                            <div style={{
-                                                                maxWidth: '70%',
-                                                                padding: '12px 16px',
-                                                                borderRadius: '18px',
-                                                                background: 'var(--white)',
-                                                                boxShadow: 'var(--shadow-sm)',
-                                                                position: 'relative'
-                                                            }}>
+                                                            <div className="message-bubble">
                                                                 <div style={{
                                                                     fontSize: '14px',
                                                                     color: 'var(--text-primary)',
@@ -1156,14 +1101,7 @@ export default function Feed() {
                                         </div>
 
                                         {/* Message Input - WhatsApp Style */}
-                                        <div style={{
-                                            padding: '16px',
-                                            borderTop: '1px solid var(--border-light)',
-                                            background: 'var(--white)',
-                                            display: 'flex',
-                                            gap: '12px',
-                                            alignItems: 'center'
-                                        }}>
+                                        <div className="message-input">
                                             <input
                                                 value={groupMessageText}
                                                 onChange={e => setGroupMessageText(e.target.value)}
@@ -1177,15 +1115,6 @@ export default function Feed() {
                                                     }
                                                 }}
                                                 placeholder="Type a message..."
-                                                style={{
-                                                    flex: 1,
-                                                    padding: '12px 16px',
-                                                    borderRadius: '24px',
-                                                    border: '1px solid var(--border-light)',
-                                                    outline: 'none',
-                                                    fontSize: '14px',
-                                                    background: 'var(--off-white)'
-                                                }}
                                             />
                                             <button
                                                 type="button"
@@ -1195,20 +1124,7 @@ export default function Feed() {
                                                         setGroupMessageText('')
                                                     }
                                                 }}
-                                                style={{
-                                                    width: '48px',
-                                                    height: '48px',
-                                                    borderRadius: '50%',
-                                                    background: 'var(--primary)',
-                                                    color: '#fff',
-                                                    border: 'none',
-                                                    cursor: 'pointer',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    boxShadow: 'var(--shadow-sm)',
-                                                    transition: 'all var(--transition-base)'
-                                                }}
+                                                className="send-button"
                                             >
                                                 📤
                                             </button>
