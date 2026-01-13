@@ -21,7 +21,7 @@ function Navigation() {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
-            const res = await fetch('${import.meta.env.VITE_API_URL}/api/auth/notifications', { headers: { Authorization: `Bearer ${token}` } })
+            const res = await fetch('https://eduway-server.onrender.com/api/auth/notifications', { headers: { Authorization: `Bearer ${token}` } })
             const data = await res.json()
             setNotifications(Array.isArray(data) ? data : [])
             setUnread((Array.isArray(data) ? data : []).filter(n => !n.read).length)
@@ -36,7 +36,7 @@ function Navigation() {
     async function markRead(id) {
         try {
             const token = localStorage.getItem('token')
-            await fetch('${import.meta.env.VITE_API_URL}/api/auth/notifications/mark-read', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ id }) })
+            await fetch('https://eduway-server.onrender.com/api/auth/notifications/mark-read', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ id }) })
             fetchNotifications()
         } catch (e) { }
     }
@@ -44,7 +44,7 @@ function Navigation() {
     async function markAll() {
         try {
             const token = localStorage.getItem('token')
-            await fetch('${import.meta.env.VITE_API_URL}/api/auth/notifications/mark-all', { method: 'POST', headers: { Authorization: `Bearer ${token}` } })
+            await fetch('https://eduway-server.onrender.com/api/auth/notifications/mark-all', { method: 'POST', headers: { Authorization: `Bearer ${token}` } })
             fetchNotifications()
         } catch (e) { }
     }
