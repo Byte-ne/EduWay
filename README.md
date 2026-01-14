@@ -3,6 +3,7 @@
 **Navigate Your Exam Preparation Journey with Precision and Confidence**
 
 EduWay is a comprehensive exam preparation platform that combines social learning, AI-powered assistance, and extensive study resources to help students excel in competitive examinations.
+Navigate to [EduWay](tinyurl.com/eduwayport) to access the site!
 
 ![EduWay](https://img.shields.io/badge/EduWay-Learning%20Platform-4285F4?style=for-the-badge&logo=google-scholar&logoColor=white)
 ![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat&logo=react)
